@@ -21,6 +21,7 @@
 				$this->db = new PDO("mysql:host=$host;dbname=$database", $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")) ;
 			} catch (Exception $e) {
 				trigger_error($e->getMessage());
+				send(array( "code" => -1, "message" => "Connection failled : {$e->getMessage()}"));
 			}
 		}
 
@@ -63,18 +64,16 @@
 		}
 
 		public static function query($query, $params = null){
-			return self::getInstance()->_query($query, $params);
+			return @self::getInstance()->_query($query, $params);
 		}
 
 		public static function update($query, $params = null){
-			return self::getInstance()->_update($query, $params);
+			return @self::getInstance()->_update($query, $params);
 		}
 
 		public static function lastInsertId(){
 			return self::getInstance()->db->lastInsertId();
 		}
-
-
 	}
 
 

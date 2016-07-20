@@ -22,7 +22,7 @@ class ActionHelper
 			if(isset($this->data['connected_user_id']))
 				self::$connected_user_id = $this->data['connected_user_id'];
 
-			self::log(print_r($this->data, true));
+			@self::log(print_r($this->data, true));
 		}
 	}
 
@@ -63,6 +63,11 @@ class ActionHelper
 	private function testAction(){
 		$boxes = Box::getAll();
 		return $this->publishResult(0, "", $boxes);	
-	}	
+	}
+
+	private function getAllBoxesAction(){
+		$boxes = Box::getAll();
+		return $this->publishResult(0, "", $boxes);
+	}
 
 }
