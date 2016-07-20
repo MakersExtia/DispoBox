@@ -1,19 +1,19 @@
 # DispoBox #
 
-##Objectif ##
+##1. Objectif ##
 Détecter la présence de personnes dans les box et afficher l'état de toutes les box sur une page web (cartes 4ème et 6ème étage, rouge = occupé, vert = libre
 
 
 
-## Fonctionnement générale ##
+##2. Fonctionnement générale ##
 
 On considère que wifi-int4 et wifi-int6 sont "identiques".
 Pour chaque étage, on un Arduino Huzzah relié à plusieurs détecteurs de présences. Huzzah se connecte au wifi et envoie l'état des box sur le serveur dispobox. Celui-ci comporte un serveur web et une base de données SQL et communique avec l'appli Android.
 
 
 
-## Fonctionnement programme par programme ##
-### Serveur Python ###
+##3. Fonctionnement programme par programme ##
+###3.1 Serveur Python ###
 Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-Vi4 ou Wifi-Vi6), comme les modules de détection Arduino.
 Le serveur crée une connexion TCP et attend des connexions.
 
@@ -25,7 +25,7 @@ Deux thread sont lancés automatiquement, et un nouveaux process de communicatio
 
 
 
-### Code Arduino HUZZAH ###
+###3.2 Code Arduino HUZZAH ###
 Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile et un pont diviseur de tension.
 - Connexion au réseau TCP : la librairie [ESP8266WiFi.h](https://github.com/ekstrand/ESP8266wifi) permet de communiquer en wifi. 
 - La fonction _setup()_ : connection au réseau wifi.
@@ -33,9 +33,9 @@ Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile
 
 
 
-### Serveur web ###
+###3.3 Serveur web ###
 
 
 
-### Appli mobile ###
+###3.4 Appli mobile ###
 
