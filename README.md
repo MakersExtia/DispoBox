@@ -7,9 +7,9 @@ Détecter la présence de personnes dans les box et afficher l'état de toutes l
 
 ##2. Fonctionnement générale ##
 
-Pour chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une carte wifi Arduino Huzzah, reliée à plusieurs détecteurs de présences
-. Huzzah se connecte au wifi et envoie l'état des box sur un serveur local, qui reçoit les infos en pythons et les stock dans une base de données MySQL. 
-Le serveur comporte également un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
+Chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une carte wifi Arduino Huzzah, reliée à plusieurs détecteurs de présence. Il contient également une pile 9v et un pont diviseur de tension afin de mesurer l'autonomie restante.
+Le boitier se connecte au wifi et envoie l'état des box sur un serveur local, qui reçoit les infos en TCP grâce à un script python et les stockent dans une base de données MySQL. 
+Le serveur fait également tourner un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
 
 
 
