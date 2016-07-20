@@ -1,0 +1,9 @@
+CREATE TABLE `box` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NULL DEFAULT NULL,
+	`state` INT(1) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=MyISAM
+;
