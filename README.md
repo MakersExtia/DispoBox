@@ -13,7 +13,7 @@ Pour chaque étage, on un Arduino Huzzah relié à plusieurs détecteurs de pré
 
 
 ##3. Fonctionnement programme par programme ##
-###3.1 Serveur Python ###
+###     - Serveur Python ###
 Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-Vi4 ou Wifi-Vi6), comme les modules de détection Arduino.
 Le serveur crée une connexion TCP et attend des connexions.
 
@@ -25,7 +25,7 @@ Deux thread sont lancés automatiquement, et un nouveaux process de communicatio
 
 
 
-###3.2 Code Arduino HUZZAH ###
+### - Code Arduino HUZZAH ###
 Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile et un pont diviseur de tension.
 - Connexion au réseau TCP : la librairie [ESP8266WiFi.h](https://github.com/ekstrand/ESP8266wifi) permet de communiquer en wifi. 
 - La fonction _setup()_ : connection au réseau wifi.
@@ -33,9 +33,9 @@ Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile
 
 
 
-###3.3 Serveur web ###
+### - Serveur web ###
 
 
 
-###3.4 Appli mobile ###
+### - Appli mobile ###
 
