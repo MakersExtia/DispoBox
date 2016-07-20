@@ -1,14 +1,15 @@
 # DispoBox #
 
 ##1. Objectif ##
-Détecter la présence de personnes dans les box et afficher l'état de toutes les box sur une page web (cartes 4ème et 6ème étage, rouge = occupé, vert = libre
+Détecter la présence de personnes dans les box et afficher l'état de toutes les box sur une _appli android/page web_ (cartes 4ème et 6ème étage, rouge = occupé, vert = libre, gris = aucune info/système éteint).
 
 
 
 ##2. Fonctionnement générale ##
 
-On considère que wifi-int4 et wifi-int6 sont "identiques".
-Pour chaque étage, on un Arduino Huzzah relié à plusieurs détecteurs de présences. Huzzah se connecte au wifi et envoie l'état des box sur le serveur dispobox. Celui-ci comporte un serveur web et une base de données SQL et communique avec l'appli Android.
+Pour chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une carte wifi Arduino Huzzah, reliée à plusieurs détecteurs de présences
+. Huzzah se connecte au wifi et envoie l'état des box sur un serveur local, qui reçoit les infos en pythons et les stock dans une base de données MySQL. 
+Le serveur comporte également un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
 
 
 
