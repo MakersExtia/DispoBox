@@ -16,8 +16,8 @@ Le serveur crée une connexion TCP et attend des connexions.
 
 **Fonctionnement des thread et process**
 Deux thread sont lancés automatiquement, et un nouveaux process de communication est crée dès qu'un nouveau matériel se connecte en TCP.
-- _main_ : crée la connexion TCP, se connecte la base de données SQL _nomdeladb_ , lance le thread _nomduthread_ et attend qu'on appuie sur une touche pour fermer toutes les connexions et arréter le programme.
-- _nomduthread_ : ouvre une connexion TCP et attend que quel'qu'un se connecte. A chaque connexion, crée un process propre à la connexion qui gère la connexion. Elle reçoit l'état des capteurs et met ces infos dans la base de données _nomdeladb_.
+- _main_ : crée la connexion TCP, se connecte la base de données SQL _nomdeladb_ , lance le thread _active_con_ et attend qu'on appuie sur une touche pour fermer toutes les connexions et arréter le programme.
+- _active_con_ : ouvre une connexion TCP et attend que quel'qu'un se connecte. A chaque connexion, crée un process propre à la connexion qui gère la connexion. Elle reçoit l'état des capteurs et met ces infos dans la base de données _nomdeladb_.
 
 ### Code Arduino HUZZAH ###
 
