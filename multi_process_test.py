@@ -36,25 +36,21 @@ def active_con(myConnexion, myAdress, q, numero):
     print "Connexion perdue avec %s" %(myAdress[0])
 
 
-def key_listener(sql_c, socket_c):
-    global keyPressed
-    keyPressed = raw_input()
-    print "key pressed !"
-    sql_c.close()
-    socket_c.close()
-    sys.exit()
-
-def wait_connexion(sock)
+def wait_connexion(sock):
     num =1
     while True:
         print "Attente d'une nouvelle connexion"
         sock.listen(5)
-        connexion, adresse = sock.accept() # Attend la prochaine connexion
-        p = Process(target = active_con, args=(connexion, adresse, state_q, num,))
+        try:
+            connexion, adresse = sock.accept() # Attend la prochaine connexion
+            p = Process(target = active_con, args=(connexion, adresse, state_q, num,))
+            p.start()
+            print p
+        except:
+            print "error dans le accept" 
+            break
         num = num + 1
-        p.start()
-        print p
-
+    print "fin du thread pour la connexion"
 
 
 
@@ -82,7 +78,6 @@ CREATE TABLE IF NOT EXISTS current_state (
 );
 """)
 
-
 # Creation du socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
@@ -97,12 +92,14 @@ state_q = Queue()
 print "Serveur prêt"
 num = 1
 compteur = 1
-connex_thread = threading.Thread(target = wait_connexion, args=(sock))
+connex_thread = threading.Thread(target = wait_connexion, args=(sock, ))
+connex_thread.daemon = True
 connex_thread.start()
 
 keyPressed = raw_input()
-print "key pressed !"
-sql_c.close()
-socket_c.close()
-sys.exit()
-
+print "----------------------------- \n -- Key pressed ! -- \n ////  EXITING ////"
+sock.shutdown(2)
+sock.close()
+print "socket closed"
+sql_con.close()
+print "connexion sql closed"
