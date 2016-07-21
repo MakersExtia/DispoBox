@@ -5,7 +5,10 @@
 		private static $instance;
 
 		public static function getEnv(){
-			return 'DEV';
+			if(strpos($_SERVER['HTTP_HOST'], "localhost") !== false)
+				return 'DEV';
+			else
+				return 'PROD';
 		}
 
 		private function __construct(){
