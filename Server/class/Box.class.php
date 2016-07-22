@@ -11,6 +11,7 @@ class Box
 
 	public $id;
 	public $state;
+	public $name;
 
 	function __construct($data = null)
  	{
@@ -24,12 +25,13 @@ class Box
 		if(is_array($data)){
 			$this->id = isset($data["id"])? $data["id"] : 0;
 			$this->state = isset($data["state"])? intval($data["state"]) : -1;
+			$this->name = isset($data["name"])? $data["name"] : null;
 		}
 	}
 
 	public static function getAll(){
 		$boxes = array();
-		$query = "SELECT * FROM box";
+		$query = "SELECT * FROM current_state";
 		$res = DBHelper::query($query);
 		if($res){
 			foreach ($res as $row) {

@@ -1,9 +1,6 @@
-CREATE TABLE `box` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(100) NULL DEFAULT NULL,
-	`state` INT(1) NOT NULL,
+CREATE TABLE `current_state` (
+	`id` int(5) NOT NULL AUTO_INCREMENT,
+	`name` varchar(50) DEFAULT NULL,
+	`state` int(5) DEFAULT '-1',
 	PRIMARY KEY (`id`)
-)
-COLLATE='utf8_general_ci'
-ENGINE=MyISAM
-;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
