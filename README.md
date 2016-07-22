@@ -66,7 +66,7 @@ _General WS use_
 _Model_
 - class/Box.class.php
 
-### _Currents WS Action_ ###
+### _Currents WS Actions_ ###
 - name : getAllBoxes
 - URL : http://190.23.0.10/dispobox/?action=getAllBoxes
 - Return : json
