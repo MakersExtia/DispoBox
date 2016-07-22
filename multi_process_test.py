@@ -14,14 +14,9 @@ dbConfig = {'user' : 'root',
             'database' : 'dispobox'}
 
 current_state = {'00' : '-1',
-        '01' : '-1',
         '41' : '-1',
         '42' : '-1',
-        '43' : '-1',
-        '44' : '-1',
-        '45' : '-1',
-        '46' : '-1',
-        '47' : '-1'}
+        '43' : '-1'}
 
 def active_connexion(myConnexion, myAdress, q, numero):
     print "Client connecté, adresse IP %s, port %s" % (myAdress[0], myAdress[1])
@@ -73,20 +68,31 @@ def wait_connexion(stop_event, sock, state_q):
             print p
         except:
             print "erreur pendant l'attente d'une nouvelle connexion" 
-            break
+            break           
         num = num + 1
     print "fin du thread pour la connexion"
     #On ferme les process
     p.terminate()
 
 
-def MAJ_current_state(stop_event, q, sqlC):
+def MAJ_current_state(sql_connexion, stop_event, q, cursor):
     while not stop_event.is_set():
         new_state = q.get()
         current_state[new_state[0]] = new_state[1]
         print current_state
+        try:
+            cursor.execute("UPDATE current_state SET state = "+ new_state[1] +" WHERE name ="+ new_state[0])
+        except mysql.connector.Error as err:
+            print("Something went wrong: {}".format(err))
+        sql_connexion.commit()
         time.sleep(0.5)
+        
     print "Sortie du thread de MAJ de la queue"
+
+
+
+
+
 
 
 
@@ -105,15 +111,8 @@ except mysql.connector.Error as err :
         print "La base de données demandée n'existe pas sur ce serveur"
     else:
         print err
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS current_state (
-    id int(5) NOT NULL AUTO_INCREMENT,
-    name varchar(50) DEFAULT NULL,
-    state int(5) DEFAULT "-1",
-    PRIMARY KEY(id)
-);
-""")
 
+sql_con.commit()
 
 # Creation du socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -127,19 +126,26 @@ except socket.error, msg:
 # Creation de la queue
 state_q = Queue()
 
+
 print "Serveur prêt"
+current_state["00"] = 1
+cursor.execute("UPDATE current_state SET state = 1 WHERE name = 00")
+sql_con.commit()
 num = 1
-compteur = 1
 stop_event = threading.Event()
 connex_thread = threading.Thread(target = wait_connexion, args=(stop_event, sock, state_q, ))
 connex_thread.daemon = True
 connex_thread.start()
-maj_state_thread = threading.Thread(target = MAJ_current_state, args=(stop_event, state_q, sql_con, ))
+maj_state_thread = threading.Thread(target = MAJ_current_state, args=(sql_con, stop_event, state_q, cursor, ))
 maj_state_thread.daemon = True
 maj_state_thread.start()
 
 keyPressed = raw_input()
 print "///////  E X I T I N G  ////////"
+
+cursor.execute("UPDATE current_state SET state = -1 WHERE name = 00")
+sql_con.commit()
+
 stop_event.set()
 sock.shutdown(2)
 sock.close()
