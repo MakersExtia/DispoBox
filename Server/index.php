@@ -8,11 +8,11 @@
     $result = array( "code" => -1, "message" => "undefined action" );
     if(isset($_REQUEST['action'])){
         $action = $_REQUEST['action'];
-        $data = isset($_REQUEST['data'])? $_REQUEST['data'] :null;
+        $data = isset($_REQUEST['data'])? $_REQUEST['data'] : null;
 
         $ah = new ActionHelper($action, $data);
-        $result = $ah->run();
+        $result = $ah->run();//run web service action
     }
 
-    send($result);
+    send($result);//display json return
 ?>

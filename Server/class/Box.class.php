@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+* Box Model data
 */
 class Box
 {
@@ -19,7 +19,11 @@ class Box
  			$this->load($data);
  		}
  	}
-	
+
+	/**
+	 * Load model from array data
+	 * @param $data
+	 */
 	public function load($data)
 	{
 		if(is_array($data)){
@@ -29,6 +33,10 @@ class Box
 		}
 	}
 
+	/**
+	 * Get all boxes info
+	 * @return array
+	 */
 	public static function getAll(){
 		$boxes = array();
 		$query = "SELECT * FROM current_state";
@@ -41,5 +49,4 @@ class Box
 
 		return $boxes;
 	}
-
 }

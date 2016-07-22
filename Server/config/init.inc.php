@@ -1,14 +1,21 @@
-<?php 
+<?php
 
+/**
+ * Auto load fonction
+ * @param $class_name
+ */
 function __autoload($class_name) {
     include __DIR__."/../class/$class_name.class.php";
 }
 
+/**
+ * Display json
+ * @param $data
+ */
 function send($data){
     echo DataDecoder::encodeParams($data);
     exit;
 }
-
 
 function check_for_fatal(){
     $error = error_get_last();

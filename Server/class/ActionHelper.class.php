@@ -37,10 +37,21 @@ class ActionHelper
 		fclose($hld);
 	}
 
+	/**
+	 * get formed array for json display
+	 * @param int $code
+	 * @param string $message
+	 * @param null $data
+	 * @return array
+	 */
 	public function publishResult($code = -1, $message = "Internal error", $data = null){
 		return array( "code" => $code, "message" => $message, "data" => $data );
 	}
 
+	/**
+	 * Execute WS action
+	 * @return array
+	 */
 	public function run(){
 		ini_set('display_errors',1);
 
@@ -51,20 +62,32 @@ class ActionHelper
 			$results = array( "code" => -1, "message" => "Action {$this->action} not found");
 
 		if(isset($results["message"]))
-			$results["message"] = utf8_encode($results["message"]);//ajout compatibilité pour les message en utf8
+			$results["message"] = utf8_encode($results["message"]);//utf8 message fix
 
 		return $results;
 	}
 
+	/**
+	 * Test action : action = test2
+	 * @return array
+	 */
 	private function test2Action(){
 		return $this->publishResult(0, "", array("1" => 1, "2" => 0));	
 	}
 
+	/**
+	 * Test action : action = test
+	 * @return array
+	 */
 	private function testAction(){
 		$boxes = Box::getAll();
 		return $this->publishResult(0, "", $boxes);	
 	}
 
+	/**
+	 * WS action get all boxes infos : action = getAllBoxes
+	 * @return array
+	 */
 	private function getAllBoxesAction(){
 		$boxes = Box::getAll();
 		return $this->publishResult(0, "", $boxes);
