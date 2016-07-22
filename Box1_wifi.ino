@@ -1,5 +1,6 @@
+
 /*
- *  Code a mettre en place sur les modules Huzzah du proket KINAO
+ *  Simple HTTP get webclient test
  */
  
 #include <ESP8266WiFi.h>
@@ -16,6 +17,10 @@ bool CONNECTED = false;
 
 // Les GPIO
 int IRpin1 = 12;
+int IRpin2 = 14;
+int IRpin3 = 16;
+
+int ir01, ir02, ir03;
 
 // Mesure de tension
 const float coeff_division = 9/5;
@@ -36,6 +41,35 @@ void setup() {
 
 
 /*
+ * Lecture de l'état des capteurs IR, puis création de la chaine de caractère à renvoyer.
+ * Pour éviter les faux positifs on regarde sur 50 valeurs. Si il y a plus de 10 positifs, alors on considère la salle comme occupée
+ */
+void readIRvalues(int &ir01,int &ir02,int &ir03) {
+  // Le code envoyé est : XX;Y avec XX le  numéro de Box et Y son état (0 vide, 1 occupé, autre = incertain)
+  ir01=0;
+  ir02=0;
+  ir03=0;
+  int i=0;
+  while (i<50) {
+    ir01 = ir01+digitalRead(IRpin1);
+    ir02 = ir02+digitalRead(IRpin2);
+    ir03 = ir03+digitalRead(IRpin3);
+    delay(50);
+    i = i+1;
+  }
+  if (ir01>10) {  ir01 = 1;  }
+  else         {  ir01 = 0;  }
+  if (ir02>10) {  ir02 = 1;  }
+  else         {  ir02 = 0;  }
+  if (ir03>10) {  ir03 = 1;  }
+  else         {  ir03 = 0;  }
+  //Serial.println("A la fin de readIRvalues : "+String(ir01)+" et "+String(ir02)+" et "+String(ir03));
+}
+
+
+
+
+/*
  * C'est la boucle principale du programme.
  * Si l'Arduino n'est pas connectée au serveur, elle retourne dans le setup.
  * Sinon, écoute et attend une requete client.
@@ -44,6 +78,7 @@ void setup() {
  *  - "" : dans ce cas récupère l'état des box avec readIRvalues() et renvoie les infos au serveur
  */
 void loop() {
+  
   // Vérifie la connexion
   if ( !client.connected() ){
     Serial.println("//// \\\\ //// PAS DE CONNEXION \\\\ //// \\\\");
@@ -52,20 +87,24 @@ void loop() {
   }
   else {
     delay(500);
-  
+    int prev1, prev2, prev3;
     // On écoute jusqu'à recevoir une requète
     reponse = client.readStringUntil('#');
     Serial.print("Message recu  : ");
     Serial.println(reponse);
     // Une fois la requète reçu :  
     if (reponse == ""){  
-      int ir01 = readIRvalues();
-      client.print("01;"+String(ir01));
+      prev1 = ir01; prev2 = ir02; prev3=ir03;
+      readIRvalues(ir01, ir02, ir03);
+      Serial.println("Valeur de premier : "+String(ir01) +" et valeur du second" +String(ir02)+" et valeur du troisieme" +String(ir03));
+      if (ir01!=prev1) {      client.print("41;"+String(ir01));}
+      if (ir02!=prev2) {      client.print("42;"+String(ir02));}
+      if (ir03!=prev3) {      client.print("43;"+String(ir03));}
     }
     else {
       int tps_attente = 2;
       Serial.println("J'attends 2 secondes");
-      client.print("ok");
+      //client.print("ok");
       delay(tps_attente*1000);
       Serial.println("Je me reveille");
     }
@@ -113,28 +152,6 @@ void connect_wifi() {
 
 
 
-/*
- * Lecture de l'état des capteurs IR, puis création de la chaine de caractère à renvoyer.
- * Pour éviter les faux positifs on regarde sur 50 valeurs. Si il y a plus de 10 positifs, alors on considère la salle comme occupée
- */
-int readIRvalues() {
-  Serial.println("** Dans readIRvalues **");
-  // Le code envoyé est : XX;Y avec XX le  numéro de Box et Y son état (0 vide, 1 occupé, autre = incertain)
-  int ir01=0;
-  
-  int i=0;
-  while (i<50) {
-    Serial.println(digitalRead(IRpin1));
-    ir01 = ir01+digitalRead(IRpin1);
-    delay(50);
-    i = i+1;
-  }
-  if (ir01>10) {  ir01 = 1;  }
-  else         {  ir01 = 0;  }
-  Serial.println(ir01);
-  return ir01;
-}
-
 
 
 
@@ -162,3 +179,4 @@ void verify_tension() {
   float real_bat = ((raw_bat * (5.0 / 1024)) * coeff_division);
   
 }
+
