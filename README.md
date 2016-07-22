@@ -35,44 +35,44 @@ Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile
 
 
 ### - Serveur web ###
-URL d'acces : http://190.23.0.10/dispobox/
-Dossier projet : /var/www/html/dispobox/
+- URL access : http://190.23.0.10/dispobox/
+- Project directory : /var/www/html/dispobox/
 
-_Config serveur_
+_Server config_
 - config/config.t : DB config
 - config/create_database.sql : Crate table query
 - init.inc.php : Autoload init + custom error handler
 
 _Lib_
-class/ActionHelper.php : Main WS handler
-class/DataDecoder.class.php : json encoder/decoder
-class/DBHelper.class.php : MySQL query helper
+- class/ActionHelper.php : Main WS handler
+- class/DataDecoder.class.php : json encoder/decoder
+- class/DBHelper.class.php : MySQL query helper
 
-main access : index.php
+- main access : index.hp
 
 _General WS use_
-WS use : http://190.23.0.10/dispobox/?action=[ACTION_NAME]&data=[DATA]
+- WS use : http://190.23.0.10/dispobox/?action=[ACTION_NAME]&data=[DATA]
 
-ACTION_NAME = WS action name
-DATA = WS action data (with json format)
+- ACTION_NAME = WS action name
+- DATA = WS action data (with json format)
 
-Return : data with json format
-JSON Struct. :
-    code : return code (if code < 0 : something go wrong with action)
-    message : general message (use when there is an error)
-    data : data result for WS action
-Sample : {"code":0,"message":"","data":[]}
+- Return : data with json format
+- JSON Struct. :
+    - code : return code (if code < 0 : something go wrong with action)
+    - message : general message (use when there is an error)
+    - data : data result for WS action
+- Sample : {"code":0,"message":"","data":[]}
 
 _Model_
-class/Box.class.php
+- class/Box.class.php
 
 _Current WS Action_
-name : getAllBoxes
-URL : http://190.23.0.10/dispobox/?action=getAllBoxes
-Return : json
-Return sample :
+- name : getAllBoxes
+- URL : http://190.23.0.10/dispobox/?action=getAllBoxes
+- Return : json
+- Return sample :
 {"code":0,"message":"","data":[{"id":"0","state":1,"name":"0"},{"id":"41","state":1,"name":"41"},{"id":"42","state":1,"name":"42"},{"id":"43","state":1,"name":"43"}]}
-ActionHelper method called : getAllBoxesAction()
+- ActionHelper method called : getAllBoxesAction()
 
 
 ### - Appli mobile ###
