@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import logger, logging
+import logger, logging, errno
 import threading, socket, sys, time, mysql.connector
 from mysql.connector import errorcode as errorDB
 from multiprocessing import Process, Queue
@@ -34,9 +34,8 @@ def active_connexion(myConnexion, myAdress, q):
     while connected:
         try:
             msgClient = myConnexion.recv(1024)
-        except:
-            print "pb pour recevoir des données"
-
+        except Exception as e:
+            LOG.error("Exception renvoyée lors de la reception des données : "+str(e))
         if msgClient:
             LOG.info("Message Recu : "+ msgClient)
             new_state = create_new_state(msgClient)
@@ -50,7 +49,6 @@ def active_connexion(myConnexion, myAdress, q):
         #    LOG.error("CRASH DANS LE PROCESS :"+ multiprocessing.current_process())
         #    connected = False
         #    pass
-        print "process qui tourne"
         time.sleep(1)
     LOG.info("Connexion perdue avec %s" %(myAdress[0]))
 
@@ -88,7 +86,8 @@ def wait_connexion(stop_event, sock, state_q):
             p = Process(target = active_connexion, args=(connexion, adresse, state_q,))
             p.start()
         except Exception as e:
-            LOG.error("Erreur pendant l'attente d'une nouvelle connexion : ")
+            if e.errno != 22: #22 est l'exception renvoyée lorsque la connexion est coupée par l'utilisateur
+                LOG.error("Exception renvoyée lors de la reception des données : "+str(e))
             break           
     LOG.debug("Fin du thread pour la connexion")
     #On ferme les process
@@ -108,7 +107,7 @@ def MAJ_current_state(sql_connexion, stop_event, q, cursor):
         try:
             cursor.execute("UPDATE current_state SET state = "+ new_state[1] +" WHERE name ="+ new_state[0])
         except mysql.connector.Error as err:
-            LOG.error("Erreur lors de la MAJ de la BDD : ",err)
+            LOG.error("Erreur lors de la MAJ de la BDD : ",str(err))
         sql_connexion.commit()
         time.sleep(0.5)
     LOG.debug("Sortie du thread de MAJ de la queue")
@@ -134,7 +133,7 @@ except mysql.connector.Error as err :
     elif err.errno == errorDB.ER_BAD_DB_ERROR:
         LOG.error("La base de données demandée n'existe pas sur ce serveur")
     else:
-        LOG.error(err)
+        LOG.error(str(err))
 sql_con.commit()
 
 
@@ -143,7 +142,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     sock.bind((HOST,PORT))
 except socket.error, msg:
-    LOG.error("La liaison du socket a échoué : ", msg)
+    LOG.error("La liaison du socket a échoué : "+ msg)
     sys.exit()
     
 
