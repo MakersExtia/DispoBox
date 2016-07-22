@@ -40,7 +40,7 @@ Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile
 
 _Server config_
 - config/config.t : DB config
-- config/create_database.sql : Crate table query
+- config/create_database.sql : Create table query
 - init.inc.php : Autoload init + custom error handler
 
 _Lib_
@@ -66,7 +66,7 @@ _General WS use_
 _Model_
 - class/Box.class.php
 
-_Current WS Action_
+### _Currents WS Action_ ###
 - name : getAllBoxes
 - URL : http://190.23.0.10/dispobox/?action=getAllBoxes
 - Return : json
