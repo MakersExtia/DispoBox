@@ -3,8 +3,11 @@ package fr.extia.extiabox;
 
 import android.app.AlertDialog;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements BasicRequestListe
     @Override
     protected void onResume() {
         super.onResume();
-
         // Par défaut, affichage du 4ème étage
         // TODO : mémoriser le dernier choix de l'utilisateur
         currentFloor = 4;
@@ -90,21 +92,39 @@ public class MainActivity extends AppCompatActivity implements BasicRequestListe
 
     public void setInterface() {
         // TODO : placement absolu des vues, à adapter aux différents formats d'écran
+        View parentView = findViewById(R.id.parentView);
+        int screenWidth = parentView.getWidth();
+        int screenHeight = parentView.getHeight();
+        if(screenWidth==0) {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            screenWidth = size.x;
+            screenHeight = size.y - 96;;
+        }
         ImageView backgroundView = (ImageView)findViewById(R.id.backgroundView);
         if(currentFloor==6) {
             backgroundView.setImageResource(R.drawable.plan6);
+            int xStart = 415*screenWidth/1500;
+            int yStart = 325*screenHeight/870;
+            int xMargin = 75*screenWidth/1500;
+            int yMargin = 220*screenHeight/870;
             for(int i=0;i<views.size();i++) {
                 View colorView = findViewById(views.get(i));
-                colorView.setX(760 + 115*(i%3));
-                colorView.setY(500 + 350*(i/3));
+                colorView.setX(xStart + xMargin*(i%3));
+                colorView.setY(yStart + yMargin*(i/3));
             }
         }
         else if(currentFloor==4) {
             backgroundView.setImageResource(R.drawable.plan4);
+            int xStart = 515*screenWidth/1767;
+            int yStart = 260*screenHeight/930;
+            int xMargin = 90*screenWidth/1767;
+            int yMargin = 275*screenHeight/930;
             for(int i=0;i<views.size();i++) {
                 View colorView = findViewById(views.get(i));
-                colorView.setX(740 + 135*(i%3));
-                colorView.setY(375 + 390*(i/3));
+                colorView.setX(xStart + xMargin*(i%3));
+                colorView.setY(yStart + yMargin*(i/3));
             }
         }
     }

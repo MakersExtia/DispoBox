@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.extia.extiabox.MainActivity">
@@ -9,9 +10,11 @@
         android:id="@+id/backgroundView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/plan4"
-        android:layout_alignParentLeft="true"
-        android:scaleType="fitCenter"/>
+        android:src="@drawable/plan6"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/forthButton"
+        android:layout_alignEnd="@+id/forthButton" />
 
     <Button
         android:id="@+id/refreshButton"
@@ -41,37 +44,37 @@
         android:id="@+id/testScreen1"
         android:layout_width="20dp"
         android:layout_height="15dp"
-        android:background="#888888"/>
+        android:background="#888888" />
 
     <View
         android:id="@+id/testScreen2"
         android:layout_width="20dp"
         android:layout_height="15dp"
-        android:background="#888888"/>
+        android:background="#888888" />
 
     <View
         android:id="@+id/testScreen3"
         android:layout_width="20dp"
         android:layout_height="15dp"
-        android:background="#888888"/>
+        android:background="#888888" />
 
     <View
         android:id="@+id/testScreen4"
         android:layout_width="20dp"
         android:layout_height="15dp"
-        android:background="#888888"/>
+        android:background="#888888" />
 
     <View
         android:id="@+id/testScreen5"
         android:layout_width="20dp"
         android:layout_height="15dp"
-        android:background="#888888"/>
+        android:background="#888888" />
 
     <View
         android:id="@+id/testScreen6"
         android:layout_width="20dp"
         android:layout_height="15dp"
-        android:background="#888888"/>
+        android:background="#888888" />
 
 
 </RelativeLayout>
