@@ -50,11 +50,11 @@ void readIRvalues(int &ir01,int &ir02,int &ir03) {
   ir02=0;
   ir03=0;
   int i=0;
-  while (i<50) {
+  while (i<100) {
     ir01 = ir01+digitalRead(IRpin1);
     ir02 = ir02+digitalRead(IRpin2);
     ir03 = ir03+digitalRead(IRpin3);
-    delay(50);
+    delay(100);
     i = i+1;
   }
   if (ir01>10) {  ir01 = 1;  }
@@ -86,7 +86,7 @@ void loop() {
     setup();
   }
   else {
-    delay(500);
+    delay(5000);
     int prev1, prev2, prev3;
     // On écoute jusqu'à recevoir une requète
     reponse = client.readStringUntil('#');
@@ -96,9 +96,11 @@ void loop() {
     if (reponse == ""){  
       prev1 = ir01; prev2 = ir02; prev3=ir03;
       readIRvalues(ir01, ir02, ir03);
-      Serial.println("Valeur de premier : "+String(ir01) +" et valeur du second" +String(ir02)+" et valeur du troisieme" +String(ir03));
+      Serial.println("Valeur de premier : "+String(ir01) +" et valeur du second : " +String(ir02)+" et valeur du troisieme : " +String(ir03));
       if (ir01!=prev1) {      client.print("41;"+String(ir01));}
+      delay(100);
       if (ir02!=prev2) {      client.print("42;"+String(ir02));}
+      delay(100);
       if (ir03!=prev3) {      client.print("43;"+String(ir03));}
     }
     else {
