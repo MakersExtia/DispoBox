@@ -12,10 +12,9 @@ Le boitier se connecte au wifi et envoie l'état des box sur un serveur local, q
 Le serveur fait également tourner un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
 
 ##3. Branchements Arduino ##
-Capteurs infra rouge :
-Box 1 = pin 12
-Box 2 = pin 14
-Box 3 = pin 16
+Capteurs infra-rouge 
+
+Box 1 = pin 12    |    Box 2 = pin 14    |    Box 3 = pin 16
 
 
 ##4. Fonctionnement programme par programme ##
