@@ -14,7 +14,7 @@ Le serveur fait également tourner un serveur web qui lui permet de communiquer 
 ##3. Branchements Arduino ##
 Capteurs infra-rouge 
 
-Box 1 = pin 12    |    Box 2 = pin 14    |    Box 3 = pin 16
+Box 1 = pin 12 - | - Box 2 = pin 14 - | - Box 3 = pin 16
 
 
 ##4. Fonctionnement programme par programme ##
