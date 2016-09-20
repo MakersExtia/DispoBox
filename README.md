@@ -11,9 +11,9 @@ Chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une cart
 Le boitier se connecte au wifi et envoie l'état des box sur un serveur local, qui reçoit les infos en TCP grâce à un script python et les stockent dans une base de données MySQL. 
 Le serveur fait également tourner un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
 
+##3. Branchement Arduino ##
 
-
-##3. Fonctionnement programme par programme ##
+##4. Fonctionnement programme par programme ##
 ###     - Serveur Python ###
 Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-Vi4 ou Wifi-Vi6), comme les modules de détection Arduino.
 Le serveur crée une connexion TCP et attend des connexions.
