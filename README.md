@@ -11,7 +11,7 @@ Chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une cart
 Le boitier se connecte au wifi et envoie l'état des box sur un serveur local, qui reçoit les infos en TCP grâce à un script python et les stockent dans une base de données MySQL. 
 Le serveur fait également tourner un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
 
-##3. Branchement Arduino ##
+##3. Branchements Arduino ##
 
 ##4. Fonctionnement programme par programme ##
 ###     - Serveur Python ###
