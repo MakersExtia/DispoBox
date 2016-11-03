@@ -11,12 +11,30 @@ Chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une cart
 Le boitier se connecte au wifi et envoie l'état des box sur un serveur local, qui reçoit les infos en TCP grâce à un script python et les stockent dans une base de données MySQL. 
 Le serveur fait également tourner un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
 
+##3. Branchements Arduino ##
+Capteurs infra-rouge 
+
+Box 1 = pin 12
+
+Box 2 = pin 14
+
+Box 3 = pin 16
 
 
-##3. Fonctionnement programme par programme ##
+##4. Fonctionnement programme par programme ##
 ###     - Serveur Python ###
-Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-Vi4 ou Wifi-Vi6), comme les modules de détection Arduino.
+Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-int4 ou Wifi-int6), comme les modules de détection Arduino.
 Le serveur crée une connexion TCP et attend des connexions.
+
+IP : 150.16.21.40
+
+Mask: 255.255.255.128
+
+GW: 150.16.21.1   
+
+USER du serveur : polinno
+
+MDP : boxdispo
 
 **Fonctionnement des thread et process**
 
@@ -35,7 +53,7 @@ Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile
 
 
 ### - Serveur web ###
-- URL access : http://190.23.0.10/dispobox/
+- URL access : http://150.16.21.40/dispobox/
 - Project directory : /var/www/html/dispobox/
 
 _Server config_
@@ -51,7 +69,7 @@ _Lib_
 - main access : index.hp
 
 _General WS use_
-- WS use : http://190.23.0.10/dispobox/?action=[ACTION_NAME]&data=[DATA]
+- WS use : http://150.16.21.40/dispobox/?action=[ACTION_NAME]&data=[DATA]
 
 - ACTION_NAME = WS action name
 - DATA = WS action data (with json format)
@@ -68,7 +86,7 @@ _Model_
 
 ### _Currents WS Actions_ ###
 - name : getAllBoxes
-- URL : http://190.23.0.10/dispobox/?action=getAllBoxes
+- URL : http://150.16.21.40/dispobox/?action=getAllBoxes
 - Return : json
 - Return sample :
 {"code":0,"message":"","data":[{"id":"0","state":1,"name":"0"},{"id":"41","state":1,"name":"41"},{"id":"42","state":1,"name":"42"},{"id":"43","state":1,"name":"43"}]}
