@@ -23,8 +23,11 @@ Box 3 = pin 16
 
 ##4. Fonctionnement programme par programme ##
 ###     - Serveur Python ###
-Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-Vi4 ou Wifi-Vi6), comme les modules de détection Arduino.
+Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-int4 ou Wifi-int6), comme les modules de détection Arduino.
 Le serveur crée une connexion TCP et attend des connexions.
+
+USER du serveur : polinno
+MDP : boxdispo
 
 **Fonctionnement des thread et process**
 
