@@ -13,7 +13,7 @@ Le serveur fait également tourner un serveur web qui lui permet de communiquer 
 
 ##3. Branchements Arduino ##
 <p align="center">
-  <img src="Arduino/branchements.JPG" width="350"/>
+  <img src="Arduino/branchements.JPG" width="450"/>
 </p>
 
 Capteurs infra-rouge 
