@@ -3,10 +3,10 @@
 #define MIN_POSITIF 4   // Nb de positif necessaires pour considérer que le box est occupé
 
 // Paramètres du connexion
-const char* ssid     = "Extia-Vis4";
-const char* password = "haverhill";
+const char* ssid     = "Extia-Int4";
+const char* password = "2d762d6963";
 // IP du serveur Extia :
-const char* host = "190.23.0.10";
+const char* host = "150.16.21.40";
 
 String reponse;
 WiFiClient client;
@@ -148,11 +148,11 @@ void connect_wifi() {
     // On utilise la classe WiFiClient pour créer une connexion TCP avec le raspberry
     const int httpPort = 50000;
     if (!client.connect(host, httpPort)) {
-      Serial.println("RASPBERRY NON VISIBLE");
+      Serial.println("SERVEUR NON VISIBLE");
       return;
     }
     else {
-      Serial.println("CONNECTE AU RASPBERRY");
+      Serial.println("CONNECTE AU SERVEUR");
       CONNECTED = true;
     }
   }
