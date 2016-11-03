@@ -26,6 +26,9 @@ Box 3 = pin 16
 Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'Extia (Wifi-int4 ou Wifi-int6), comme les modules de détection Arduino.
 Le serveur crée une connexion TCP et attend des connexions.
 
+IP : 150.16.21.40
+Mask: 255.255.255.128
+GW: 150.16.21.1   
 USER du serveur : polinno
 MDP : boxdispo
 
