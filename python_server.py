@@ -7,7 +7,7 @@ from mysql.connector import errorcode as errorDB
 from multiprocessing import Process, Queue
 import multiprocessing
 
-HOST = '190.23.0.10'
+HOST = '150.16.21.40'
 PORT = 50000
 
 # Configuration de la base de données MySQL
