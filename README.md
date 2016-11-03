@@ -27,9 +27,13 @@ Le serveur python tourne sur le server. Connecté au wifi de la LAN visiteur d'E
 Le serveur crée une connexion TCP et attend des connexions.
 
 IP : 150.16.21.40
+
 Mask: 255.255.255.128
+
 GW: 150.16.21.1   
+
 USER du serveur : polinno
+
 MDP : boxdispo
 
 **Fonctionnement des thread et process**
@@ -49,7 +53,7 @@ Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile
 
 
 ### - Serveur web ###
-- URL access : http://190.23.0.10/dispobox/
+- URL access : http://150.16.21.40/dispobox/
 - Project directory : /var/www/html/dispobox/
 
 _Server config_
@@ -65,7 +69,7 @@ _Lib_
 - main access : index.hp
 
 _General WS use_
-- WS use : http://190.23.0.10/dispobox/?action=[ACTION_NAME]&data=[DATA]
+- WS use : http://150.16.21.40/dispobox/?action=[ACTION_NAME]&data=[DATA]
 
 - ACTION_NAME = WS action name
 - DATA = WS action data (with json format)
@@ -82,7 +86,7 @@ _Model_
 
 ### _Currents WS Actions_ ###
 - name : getAllBoxes
-- URL : http://190.23.0.10/dispobox/?action=getAllBoxes
+- URL : http://150.16.21.40/dispobox/?action=getAllBoxes
 - Return : json
 - Return sample :
 {"code":0,"message":"","data":[{"id":"0","state":1,"name":"0"},{"id":"41","state":1,"name":"41"},{"id":"42","state":1,"name":"42"},{"id":"43","state":1,"name":"43"}]}
