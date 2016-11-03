@@ -12,7 +12,7 @@ Le boitier se connecte au wifi et envoie l'état des box sur un serveur local, q
 Le serveur fait également tourner un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
 
 ##3. Branchements Arduino ##
-![alt tag](https://github.com/MakersExtia/DispoBox/edit/master/Arduino/branchements.jpg)
+![Alt text](Arduino/branchements.jpg?raw=true "Branchements de l'Arduino")
 
 Capteurs infra-rouge 
 
