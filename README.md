@@ -99,3 +99,8 @@ _Model_
 
 ### - Appli mobile ###
 
+### - Numérotation des box par étage ###
+<p align="center">
+  <img src="numerotation_box.JPG" width="450"/>
+</p>
+
