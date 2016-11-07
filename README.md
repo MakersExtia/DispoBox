@@ -51,14 +51,17 @@ Trois thread sont lancés automatiquement, et un nouveaux process de communicati
 user - root ; pwd - polinno
 
 DATABASE - dispobox
-<p align="center">
-  <img src="images/mysql_stats_format.JPG" width="450"/>
-</p>
 
 *** TABLES : ***
 current_state : regroupe l'état courant de chaque box
+<p align="center">
+  <img src="images/mysql_current_state_format.JPG" width="200"/>
+</p>
 
 stats : garde toutes les infos depuis le début du lancement du projet.
+<p align="center">
+  <img src="images/mysql_stats_format.JPG" width="850"/>
+</p>
 
 
 ### - Code Arduino HUZZAH ###
