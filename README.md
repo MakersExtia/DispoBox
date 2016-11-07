@@ -48,11 +48,13 @@ Trois thread sont lancés automatiquement, et un nouveaux process de communicati
 - _MAJ_current_state_ : boucle qui récupère chaque nouvelle valeur dans la queue pour la mettre à jour dans la base de données SQL.
 
 **MySQL**
-user - root ; pwd - polinno
 
-DATABASE - dispobox
+Identifiants de la BDD MySQL : <i>user</i> - <b>root</b> ; <i>pwd</i> - <b>polinno</b>
 
-*** TABLES : ***
+***DATABASE***
+dispobox
+
+***TABLES***
 current_state : regroupe l'état courant de chaque box
 <p align="center">
   <img src="images/mysql_current_state_format.JPG" width="200"/>
