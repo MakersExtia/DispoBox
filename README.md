@@ -1,7 +1,7 @@
 # DispoBox #
 
 ##1. Objectif ##
-Détecter la présence de personnes dans les box et afficher l'état de toutes les box sur une _appli android/page web_ (cartes 4ème et 6ème étage, rouge = occupé, vert = libre, gris = aucune info/système éteint).
+Détecter la présence de personnes dans les box et afficher l'état de toutes les box sur une _appli android/page web_ (cartes 4ème et 6ème étage, rouge = occupé = etat 1, vert = libre = etat 0, gris = aucune info/système éteint = etat -1).
 
 
 
