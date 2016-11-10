@@ -4,7 +4,6 @@
 
 // Paramètres du connexion
 const char* ssid     = "Extia-Int4";
-const char* password = "2d762d6963";
 // IP du serveur Extia :
 const char* host = "150.16.21.40";
 
