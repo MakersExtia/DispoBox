@@ -1,5 +1,5 @@
 #include <ESP8266WiFi.h>
-#define NB_VERIF_IR 40 // Nombre de fois sur lesquels on regarde la valeur du capteur
+#define NB_VERIF_IR 60 // Nombre de fois sur lesquels on regarde la valeur du capteur
 #define MIN_POSITIF 4   // Nb de positif necessaires pour considérer que le box est occupé
 
 // Paramètres du connexion
@@ -32,7 +32,7 @@ const float coeff_division = 9 / 5;
     Lance uniquement la fonction connect_wifi()
 */
 void setup() {
-  indice = 50;
+  indice = NB_VERIF_IR-10;
   Serial.println("----------------- DANS LE SETUP ------------------");
   Serial.begin(115200);
   delay(1000);
