@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dispo Box</string>
+    <string name="refreshText">Rafréchir</string>
+    <string name="sixthText">6ème étage</string>
+    <string name="forthText">4ème étage</string>
+    <string name="try_again">Essayer encore</string>
+    <string name="error_server_unknown">Réponse inconnue du serveur</string>
+    <string name="error_server_contact">Erreur serveur contactant</string>
+    <string name="item_menu_home">Accueil</string>
+    <string name="item_menu_floor_four">4eme étage</string>
+    <string name="item_menu_floor_six">6eme étage</string>
+    <string name="item_menu_floor_four_go">Aller au 4eme étage</string>
+    <string name="item_menu_floor_six_go">Aller au 6eme étage</string>
+    <string name="item_menu_setting">Réglages</string>
+    <string name="title_setting">Réglage</string>
+    <string name="test">Test</string>
+    <string name="text_accueil">Bonjour et bienvenue sur l\'application qui vous permet de connaitre si les salles sont disponibles.</string>
+    <string name="hint_ip">Entrer une adresse IP</string>
+    <string name="btn_save_ip">Enregistrer</string>
+    <string name="data_empty">L\'IP est vide</string>
+    <string name="data_save">L\'IP est enregistré</string>
+</resources>

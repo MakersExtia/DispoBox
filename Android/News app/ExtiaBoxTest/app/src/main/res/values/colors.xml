@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary"> #ff7700</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="statusBarColor">#303F9F</color>
+    <color name="couloirColor">#696969</color>
+    <color name="salleColor">#D2D2D2</color>
+    <color name="salleColorGreen">#4cff4c</color>
+    <color name="salleColorRed">#ff3232</color>
+
+
+</resources>

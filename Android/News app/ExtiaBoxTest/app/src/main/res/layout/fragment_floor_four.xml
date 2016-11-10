@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cl_fcl_maincontent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_loading_screen" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_orders_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/ScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_parent_view_floor_four"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_textView"
+                    android:text="@string/title_floor_four_frag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/tv_title"
+                    android:textStyle="bold"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_plan_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_couloir_0_1"
+                        android:text="Couloir"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/white"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_plan_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_couloir_1_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_4_5"
+                        android:text="Thierry Marx"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_cuisine_1"
+                        android:text="Cuisine"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/colorPrimary"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_4_1"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"
+                        android:text="Rafael Nadal" />
+
+                    <TextView
+                        android:id="@+id/tv_couloir_1_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_plan_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_couloir_2_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_4_6"
+                        android:text="Beyonce"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_cuisine_2"
+                        android:text="Cuisine"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/colorPrimary"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_4_2"
+                        android:text="Mark Zuckerberg"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_couloir_2_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_plan_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_couloir_3_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_4_7"
+                        android:text="Steve Jobs"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_couloir_3_3"
+                        android:text="Cuisine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/white"
+                        android:background="@android:color/white"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_4_3"
+                        android:text="Frida Kahlo"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_couloir_3_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_plan_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_couloir_4_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_5_2"
+                        android:text="S48"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/couloirColor"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_couloir_4_3"
+                        android:text="Cuisine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/white"
+                        android:background="@android:color/white"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_salle_4_4"
+                        android:text="Gandhi"
+                        android:gravity="center"
+                        android:layout_width="@dimen/width_salle"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".30"/>
+
+                    <TextView
+                        android:id="@+id/tv_couloir_4_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/couloirColor"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_weight=".20"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_go_floor_six"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_menu_floor_six_go"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+                    android:layout_weight="1"
+                    android:layout_margin="15dp"/>
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_floor_four"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:scaleType="fitXY"/>-->
+
+            </LinearLayout>
+        </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>

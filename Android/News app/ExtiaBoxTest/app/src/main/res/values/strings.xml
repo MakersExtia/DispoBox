@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ExtiaBoxTest</string>
+    <string name="action_settings">Settings</string>
+    <string name="titleMainFrag">Main Fragment</string>
+    <string name="title_floor_four_frag">Floor Four Fragment</string>
+    <string name="title_floor_six_frag">Floor Six Fragment</string>
+    <string name="error_server_unknown">Unknown response from server</string>
+    <string name="error_server_contact">Error contacting server</string>
+    <string name="item_menu_home">Home</string>
+    <string name="item_menu_floor_four">Floor 4</string>
+    <string name="item_menu_floor_six">Floor 6</string>
+    <string name="item_menu_floor_four_go">Go Floor 4</string>
+    <string name="item_menu_floor_six_go">Go Floor 6</string>
+    <string name="item_menu_setting">Settings</string>
+    <string name="title_setting">Setting</string>
+    <string name="test">Test</string>
+    <string name="text_accueil">Hello and welcome to the application that allows you to know if the rooms are available.</string>
+    <string name="hint_ip">Enter an IP address</string>
+    <string name="btn_save_ip">Save</string>
+    <string name="data_empty">The IP is empty</string>
+    <string name="data_save">The IP is saved</string>
+</resources>
