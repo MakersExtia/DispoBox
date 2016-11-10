@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    String UrlWebservice;
+
     // controller pour la connexion au serveur
     static ServerServicesProvider mServicesProvider;
 
@@ -139,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences(Constants.PREF_KEY_NAME, Context.MODE_PRIVATE);
         dataIP = sharedPreferences.getString(Constants.PREF_KEY_IP, "");
 
-        if(dataIP != null){
-            Constants.URL_DEFAULT = dataIP;
+        if(dataIP != null && !dataIP.isEmpty()){
+            UrlWebservice = dataIP;
         } else {
-            Constants.URL_DEFAULT = "http://150.16.21.40/";
+            UrlWebservice = Constants.URL_DEFAULT;
         }
     }
 
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     public ServerServicesProvider getServerServicesProvider(){
         if(mServicesProvider == null){
             mServicesProvider = new ServerServicesProvider();
-            mServicesProvider.setEndPoint(Constants.URL_DEFAULT);
+            mServicesProvider.setEndPoint(UrlWebservice);
             mServicesProvider.createWebInterface();
         }
 
@@ -301,5 +303,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public String getUrlWebservice() {
+        return UrlWebservice;
+    }
+
+    public void setUrlWebservice(String urlWebservice) {
+        UrlWebservice = urlWebservice;
     }
 }

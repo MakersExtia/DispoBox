@@ -17,8 +17,7 @@ public class Constants {
     // url webszervice = http://150.16.21.40/dispobox/?action=getAllBoxes
 
     // constante pour l'utilisation de l'url pour retrofit
-    // public static final String URL_DEFAULT = "http://150.16.21.40/";
-    public static String URL_DEFAULT = "";
+    public static final String URL_DEFAULT = "http://150.16.21.40/";
 
     // constante pour le model de la classe Salle
     public static final String SALLE_ID = "id";

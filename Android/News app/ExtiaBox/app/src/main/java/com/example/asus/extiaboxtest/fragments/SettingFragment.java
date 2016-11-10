@@ -86,7 +86,7 @@ public class SettingFragment extends Fragment {
         dataIP = sharedPreferences.getString(Constants.PREF_KEY_IP, "");
 
         // modification de la variable qui au passage n'est plus constante pour des besoins de dynamisme pour le changement de l'ip
-        Constants.URL_DEFAULT = dataIP;
+        mActivity.setUrlWebservice(dataIP);
 
         // ajout des données dans la vue
         refreshView();
