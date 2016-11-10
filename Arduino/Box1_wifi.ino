@@ -1,5 +1,5 @@
 #include <ESP8266WiFi.h>
-#define NB_VERIF_IR 60 // Nombre de fois sur lesquels on regarde la valeur du capteur
+#define NB_VERIF_IR 40 // Nombre de fois sur lesquels on regarde la valeur du capteur
 #define MIN_POSITIF 4   // Nb de positif necessaires pour considérer que le box est occupé
 
 // Paramètres du connexion
@@ -16,13 +16,14 @@ bool CONNECTED = false;
 int IRpin1 = 12;
 int IRpin2 = 14;
 int IRpin3 = 16;
+int IRpin4 = 13;
 
 
 // Variables pour l'état des box
-int ir01, ir02, ir03;
+int ir01, ir02, ir03, ir04;
 int indice;
-int box1_queue[NB_VERIF_IR], box2_queue[NB_VERIF_IR], box3_queue[NB_VERIF_IR];
-int box1, box2, box3;
+int box1_queue[NB_VERIF_IR], box2_queue[NB_VERIF_IR], box3_queue[NB_VERIF_IR], box4_queue[NB_VERIF_IR];
+int box1, box2, box3, box4;
 
 // Mesure de tension
 const float coeff_division = 9 / 5;
@@ -36,9 +37,9 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
   connect_wifi();
-  box1 = -1;  box2 = -1;  box3 = -1;
+  box1 = -1;  box2 = -1;  box3 = -1;  box4 = -1;
   // Init des queues
-  for (int i = 0; i++; i < 100) {    box1_queue[i] = 0;    box2_queue[i] = 0;    box3_queue[i] = 0;  }
+  for (int i = 0; i < NB_VERIF_IR;i++) {    box1_queue[i] = 0;    box2_queue[i] = 0;    box3_queue[i] = 0;  box4_queue[i] = 0;  }
   Serial.println("------------------ FIN DU SETUP ------------------");
   Serial.setTimeout(10000);
 }
@@ -52,7 +53,7 @@ void loop() {
     setup();
   }
   else {
-    int prev1, prev2, prev3;
+    int prev1, prev2, prev3, prev4;
     // On écoute jusqu'à recevoir une requète
     reponse = client.readStringUntil('#');
     // Une fois la requète reçu :
@@ -60,19 +61,26 @@ void loop() {
       box1_queue[indice] = digitalRead(IRpin1);
       box2_queue[indice] = digitalRead(IRpin2);
       box3_queue[indice] = digitalRead(IRpin3);
+      box4_queue[indice] = digitalRead(IRpin4);
     }
     else if (reponse == "infos") {
       Serial.print("Message recu  : ");
       Serial.println(reponse);
-      prev1 = box1; prev2 = box2; prev3 = box3;
+      prev1 = box1; prev2 = box2; prev3 = box3; prev4 = box4;
       for (int j=0;j<NB_VERIF_IR;j++){
         box1+=box1_queue[j];  
         box2+=box2_queue[j];  
-        box3+=box3_queue[j];  
+        box3+=box3_queue[j]; 
+        box4+=box4_queue[j];  
       }
       if (box1 > MIN_POSITIF) {box1=1;} else {box1=0;}
       if (box2 > MIN_POSITIF) {box2=1;} else {box2=0;}
       if (box3 > MIN_POSITIF) {box3=1;} else {box3=0;}
+      if (box4 > MIN_POSITIF) {box4=1;} else {box4=0;}
+      Serial.print(box1);
+      Serial.print(box2);
+      Serial.print(box3);
+      Serial.println(box4);
       
       indice = (indice+1) % NB_VERIF_IR;
       
@@ -81,11 +89,14 @@ void loop() {
       if (box1 != prev1) {nb_chgt +=1;}
       if (box2 != prev2) {nb_chgt +=1;}
       if (box3 != prev3) {nb_chgt +=1;}
+      if (box4 != prev4) {nb_chgt +=1;}
       
       reponse = String(nb_chgt);
       if (box1 != prev1) {        reponse = reponse+"41"+String(box1);      }
       if (box2 != prev2) {        reponse = reponse+"42"+String(box2);      }
       if (box3 != prev3) {        reponse = reponse+"43"+String(box3);      }
+      if (box4 != prev4) {        reponse = reponse+"44"+String(box4);      }
+      Serial.println(reponse);
       client.print(reponse);
       
       /*
@@ -157,35 +168,3 @@ void connect_wifi() {
     }
   }
 }
-
-
-
-
-
-
-
-/*
-   Mesure la tension aux bornes de la pile.
-*/
-void verify_tension() {
-  /*
-    Pont diviseur de tension pour mesurer la tension de la pile
-    Vmax (mesure analogique) = 5v
-    Vpile = 9v
-    R2 /(R1+R2) = 0.55
-
-    Soit R2 = 0.55/0.45 R1 = 1.22 R1
-    On prend :
-    R1 = 1K
-    R2 = 1.22K = 1K + 220
-  */
-  // Fonction qui vérifie la tension aux bornes de la pile. Si la tension est trop faible, préviens le raspberry.
-
-  // Mesure de la tension brute
-  unsigned int raw_bat = analogRead(A0);
-
-  // Calcul de la tension réel
-  float real_bat = ((raw_bat * (5.0 / 1024)) * coeff_division);
-
-}
-
