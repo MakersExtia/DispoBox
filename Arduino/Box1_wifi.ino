@@ -81,9 +81,7 @@ void loop() {
       Serial.print(box2);
       Serial.print(box3);
       Serial.println(box4);
-      
-      indice = (indice+1) % NB_VERIF_IR;
-      
+            
       String reponse;
       int nb_chgt=0;
       if (box1 != prev1) {nb_chgt +=1;}
@@ -128,6 +126,7 @@ void loop() {
       //      delay(tps_attente*1000);
       //      Serial.println("Je me reveille");
     }
+    indice = (indice+1) % NB_VERIF_IR;
 
     // Test de mise en veille
     //ESP.deepSleep(25000000,WAKE_RF_DEFAULT);
