@@ -19,4 +19,7 @@
     <string name="btn_save_ip">Save</string>
     <string name="data_empty">The IP is empty</string>
     <string name="data_save">The IP is saved</string>
+    <string name="title_legende">Legend</string>
+    <string name="legend_dispo">Available</string>
+    <string name="legend_no_dispo">Unavailable</string>
 </resources>

@@ -336,6 +336,75 @@
                     android:layout_weight="1"
                     android:layout_margin="15dp"/>
 
+                <TextView
+                    android:id="@+id/tv_legende"
+                    android:text="@string/title_legende"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/tv_title"
+                    android:textStyle="bold"
+                    android:padding="5dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_plan_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_legende_1_1"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColorGreen"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp" />
+
+                    <TextView
+                        android:id="@+id/tv_legende_1_2"
+                        android:text="@string/legend_dispo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_plan_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_legende_2_1"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:background="@color/salleColorRed"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp" />
+
+                    <TextView
+                        android:id="@+id/tv_legende_2_2"
+                        android:text="@string/legend_no_dispo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/tv_title"
+                        android:textStyle="bold"
+                        android:padding="5dp" />
+
+                </LinearLayout>
+
                 <!--<ImageView-->
                     <!--android:id="@+id/iv_floor_six"-->
                     <!--android:layout_width="match_parent"-->

@@ -20,4 +20,7 @@
     <string name="btn_save_ip">Enregistrer</string>
     <string name="data_empty">L\'IP est vide</string>
     <string name="data_save">L\'IP est enregistré</string>
+    <string name="title_legende">Légende</string>
+    <string name="legend_dispo">Disponible</string>
+    <string name="legend_no_dispo">Indisponible</string>
 </resources>
