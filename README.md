@@ -210,4 +210,18 @@ L'application mobile Android permet d'afficher en temps réel la disponibilité 
 		* com.google.code.gson:gson:2.6.2 : Librairie utile pour l'utilisation de retrofit
 		* com.squareup.retrofit2', name: 'converter-gson', version: '2.1.0' : Librairie utile pour l'utilisation de retrofit
     
+** Generate APK **
+
+	- Android studio :
+		* Menu Build -> Build Apk
+		* APK in folder (projectName)\app\build\outputs\apk
+		
+	- Envoyer l'apk par e-mail au personne souhaité 
+	
+	- Paramètrage du device Android 
+		* Paramètre -> Sécurité -> Autorisé les app de sources inconnues 
+		
+	- Reception du mail téléchargement de l'apk et installation 
+	
+	- Générer un nouvelle APK aprés chaque mise à jour importante de l'app
 
