@@ -4,10 +4,11 @@
 
 // Paramètres du connexion
 const char* ssid     = "Extia-Int4";
+const char* password = "2d762d6963";
 // IP du serveur Extia :
 const char* host = "150.16.21.40";
 
-String reponse;
+String question;
 WiFiClient client;
 bool CONNECTED = false;
 
@@ -52,19 +53,21 @@ void loop() {
     setup();
   }
   else {
+    Serial.println("DANS LA BOUCLE !!");
     int prev1, prev2, prev3, prev4;
     // On écoute jusqu'à recevoir une requète
-    reponse = client.readStringUntil('#');
+    question = client.readStringUntil('#');
     // Une fois la requète reçu :
-    if (reponse == "") {
+    if (question == "nada") {
       box1_queue[indice] = digitalRead(IRpin1);
       box2_queue[indice] = digitalRead(IRpin2);
       box3_queue[indice] = digitalRead(IRpin3);
       box4_queue[indice] = digitalRead(IRpin4);
+      indice = (indice+1) % NB_VERIF_IR;
+      client.print("RAS");
     }
-    else if (reponse == "infos") {
-      Serial.print("Message recu  : ");
-      Serial.println(reponse);
+    else if (question == "infos") {
+      Serial.println("--- demande d'info ---");
       prev1 = box1; prev2 = box2; prev3 = box3; prev4 = box4;
       for (int j=0;j<NB_VERIF_IR;j++){
         box1+=box1_queue[j];  
@@ -76,93 +79,34 @@ void loop() {
       if (box2 > MIN_POSITIF) {box2=1;} else {box2=0;}
       if (box3 > MIN_POSITIF) {box3=1;} else {box3=0;}
       if (box4 > MIN_POSITIF) {box4=1;} else {box4=0;}
-      Serial.print(box1);
-      Serial.print(box2);
-      Serial.print(box3);
-      Serial.println(box4);
             
-      String reponse;
       int nb_chgt=0;
       if (box1 != prev1) {nb_chgt +=1;}
       if (box2 != prev2) {nb_chgt +=1;}
       if (box3 != prev3) {nb_chgt +=1;}
       if (box4 != prev4) {nb_chgt +=1;}
       
-      reponse = String(nb_chgt);
+      String reponse = String(nb_chgt);
       if (box1 != prev1) {        reponse = reponse+"41"+String(box1);      }
       if (box2 != prev2) {        reponse = reponse+"42"+String(box2);      }
       if (box3 != prev3) {        reponse = reponse+"43"+String(box3);      }
       if (box4 != prev4) {        reponse = reponse+"44"+String(box4);      }
       Serial.println(reponse);
       client.print(reponse);
-      
-      /*
-      if (box1 != prev1) {        client.print("41;" + String(box1));      }
-      delay(1000);
-      if (box2 != prev2) {        client.print("42;" + String(box2));      }
-      delay(1000);
-      if (box3 != prev3) {        client.print("43;" + String(box3));      }
-
-      if ((box1==prev1)&&(box2==prev2)&&(box3==prev3)) {client.print("rien");}
-      
-      client.print("3410420431");
-      delay(3000);
-      client.print("1411");
-      delay(3000);
-      client.print("3410421430");
-      delay(3000);
-      client.print("1431");
-      delay(3000);
-      client.print("2420430");
-      delay(3000);
-      */
-    }
-    else {
-      Serial.println("MESSAGE PAS VIDE");
-      //      int tps_attente = 2;
-      //      Serial.println("J'attends 2 secondes");
-      //      //client.print("ok");
-      //      delay(tps_attente*1000);
-      //      Serial.println("Je me reveille");
-    }
-    indice = (indice+1) % NB_VERIF_IR;
-
-    // Test de mise en veille
-    //ESP.deepSleep(25000000,WAKE_RF_DEFAULT);
+      indice = (indice+1) % NB_VERIF_IR;
+   }
+   else if (question == "datas") {
+      String reponse;
+      reponse = "441"+digitalRead(IRpin1)+"42"+digitalRead(IRpin2)+"43"+digitalRead(IRpin3)+"44"+digitalRead(IRpin4);
+      client.print(reponse);
+   }
+   else {
+      Serial.println("-- J'AI RECU UN MESSAGE VIDE MAIS J'AVANCE !--");
+   }
+      delay(200);
+      question = "";
   }
 }
 
 
 
-
-
-
-/*
-   Connexion au réseau wifi, récupère et affiche son adresse IP, puis ouvre une connexion TCP avec la raspberry
-*/
-void connect_wifi() {
-  // Connexion au réseau Wifi
-  while (!CONNECTED) {
-    Serial.print("Connecting ...");
-    WiFi.begin(ssid, password);
-
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.print(".");
-    }
-    Serial.println("WiFi connected");
-    Serial.println("Mon IP address: ");
-    Serial.println(WiFi.localIP());
-
-    // On utilise la classe WiFiClient pour créer une connexion TCP avec le raspberry
-    const int httpPort = 50000;
-    if (!client.connect(host, httpPort)) {
-      Serial.println("SERVEUR NON VISIBLE");
-      return;
-    }
-    else {
-      Serial.println("CONNECTE AU SERVEUR");
-      CONNECTED = true;
-    }
-  }
-}
