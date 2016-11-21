@@ -2,11 +2,6 @@
 #define NB_VERIF_IR 60 // Nombre de fois sur lesquels on regarde la valeur du capteur
 #define MIN_POSITIF 4   // Nb de positif necessaires pour considérer que le box est occupé
 
-// Paramètres du connexion
-const char* ssid     = "Extia-Int4";
-// IP du serveur Extia :
-const char* host = "150.16.21.40";
-
 String question;
 WiFiClient client;
 bool CONNECTED = false;
