@@ -234,3 +234,9 @@ L'IHM actuelle est la suivante :
 
 Elle n'est pas très intuitive et risque de perdre les utilisateurs. Il faut trouver une meilleure solution.
 
+Voici une proposition d'amélioration envisageable :
+<p align="center">
+  <img src="images/proposition_IHM.JPG" width="450"/>
+</p>
+
+
