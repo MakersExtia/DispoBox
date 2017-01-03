@@ -234,11 +234,11 @@ L'IHM actuelle est la suivante :
 
 Elle n'est pas très intuitive et risque de perdre les utilisateurs. Il faut trouver une meilleure solution.
 
-Voici Deux propositions, laides mais pouvant donner des idées :
+Voici quelques propositions, laides mais pouvant donner des idées :
 <p align="center">
-  <img src="images/proposition_IHM.JPG" width="300"/>
-  <img src="images/proposition_IHM2.JPG" width="300"/>
-  <img src="images/proposition_IHM3.JPG" width="300"/>
+  <img src="images/proposition_IHM.JPG" width="280"/>
+  <img src="images/proposition_IHM2.JPG" width="280"/>
+  <img src="images/proposition_IHM3.JPG" width="280"/>
 </p>
 
 
