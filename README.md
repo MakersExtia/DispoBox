@@ -226,4 +226,19 @@ L'application mobile Android permet d'afficher en temps réel la disponibilité 
 	- Reception du mail téléchargement de l'apk et installation 
 	
 	- Générer un nouvelle APK aprés chaque mise à jour importante de l'app
+** L'IHM **
+L'IHM actuelle est la suivante :
+<p align="center">
+  <img src="images/Screenshot_appli_android.png" width="450"/>
+</p>
+
+Elle n'est pas très intuitive et risque de perdre les utilisateurs. Il faut trouver une meilleure solution.
+
+Voici quelques propositions, laides mais pouvant donner des idées :
+<p align="center">
+  <img src="images/proposition_IHM.JPG" width="280"/>
+  <img src="images/proposition_IHM2.JPG" width="280"/>
+  <img src="images/proposition_IHM3.JPG" width="280"/>
+</p>
+
 
