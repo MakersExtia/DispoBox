@@ -236,9 +236,9 @@ Elle n'est pas très intuitive et risque de perdre les utilisateurs. Il faut tro
 
 Voici Deux propositions, laides mais pouvant donner des idées :
 <p align="center">
-  <img src="images/proposition_IHM.JPG" width="400"/>
-  <img src="images/proposition_IHM2.JPG" width="400"/>
-  <img src="images/proposition_IHM3.JPG" width="400"/>
+  <img src="images/proposition_IHM.JPG" width="300"/>
+  <img src="images/proposition_IHM2.JPG" width="300"/>
+  <img src="images/proposition_IHM3.JPG" width="300"/>
 </p>
 
 
