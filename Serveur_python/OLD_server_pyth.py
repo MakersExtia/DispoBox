@@ -51,7 +51,7 @@ def active_connexion(myConnexion, myAdress, q):
         nbit = 65
         for i in range(1,nbit+1):
             if (i<nbit):
-                myConnexion.send("#")
+                myConnexion.send("nada#")
             else:
                 print("Demande d'infos")
                 myConnexion.send("infos#")
