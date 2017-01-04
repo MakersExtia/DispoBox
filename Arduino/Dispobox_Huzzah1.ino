@@ -2,8 +2,10 @@
 
 // Paramètres du connexion
 const char* ssid     = "Extia-Int4";
+const char* password = "";
 // IP du serveur Extia :
 const char* host = "150.16.21.40";
+
 
 String question;
 WiFiClient client;
