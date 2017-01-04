@@ -122,7 +122,7 @@ _Model_
 
 ##5. Numérotation des box par étage ##
 <p align="center">
-  <img src="images/numerotation_box.JPG" width="450"/>
+  <img src="images/numerotation_box.JPG" width="600"/>
 </p>
 
 ### - Appli mobile ###
