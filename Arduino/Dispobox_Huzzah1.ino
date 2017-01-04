@@ -10,11 +10,16 @@ WiFiClient client;
 bool CONNECTED = false;
 
 // Les GPIO
-int IRpin1 = 4;
+int IRpin1 = 12;
 int IRpin2 = 14;
 int IRpin3 = 16;
 int IRpin4 = 13;
 
+// NUMEROS DES BOX
+String BOX1 = "41";
+String BOX2 = "42";
+String BOX3 = "43";
+String BOX4 = "44";
 
 /*
     Lance uniquement la fonction connect_wifi()
@@ -31,7 +36,6 @@ void setup() {
 
 void loop() {
   // Vérifie la connexion
-  Serial.println(String(digitalRead(IRpin1))+"  -  "+String(digitalRead(IRpin2))+"  -  "+String(digitalRead(IRpin3))+"  -  "+String(digitalRead(IRpin4)));
   if (!client.connected()) {
     Serial.println("//// \\\\ //// PAS DE CONNEXION \\\\ //// \\\\");
     CONNECTED = false;  
@@ -40,7 +44,7 @@ void loop() {
   else {
     question = client.readStringUntil('#');
     if (question == "datas") {
-      client.print("41"+String(digitalRead(IRpin1))+"42"+String(digitalRead(IRpin2))+"43"+String(digitalRead(IRpin3))+"44"+String(digitalRead(IRpin4)));
+      client.print(BOX1+String(digitalRead(IRpin1))+BOX2+String(digitalRead(IRpin2))+BOX3+String(digitalRead(IRpin3))+BOX4+String(digitalRead(IRpin4)));
     }
     else {
     }    
@@ -48,10 +52,6 @@ void loop() {
     question = "";
   }
 }
-
-
-
-
 
 
 /*
@@ -70,7 +70,6 @@ void connect_wifi() {
     Serial.println("WiFi connected");
     Serial.println("Mon IP address: ");
     Serial.println(WiFi.localIP());
-    Serial.println(String(digitalRead(IRpin1))+"   "+String(digitalRead(IRpin2))+"   "+String(digitalRead(IRpin3))+"   "+String(digitalRead(IRpin4)));
 
     // On utilise la classe WiFiClient pour créer une connexion TCP avec le raspberry
     const int httpPort = 50000;
