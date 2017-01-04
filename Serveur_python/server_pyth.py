@@ -41,8 +41,15 @@ current_state = {'0' : '-1',
 
 dq = {'41' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
       '42' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-      '43' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]), 
-      '44' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])}
+      '43' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
+      '44' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
+      '45' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
+      '46' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
+      '47' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])}
+
+
+
+
 
 """
     A chaque nouvelle conexxion, cette fonction est appelée par un nouveau process.
@@ -148,11 +155,11 @@ def store_complete_datas(cursor):
     # On cree la requete SDQL ne premiere fois
     SQL_order = "INSERT INTO "+all_data_table+" (`0`,"             # syntaxe de debut et champ '0'
     for i in range(41,48)+range(61,67):
-        SQL_order += "`"+str(i)+"`,"                               # champs 41 à 67                        
-    SQL_order += "`68`) VALUES ("+str(current_state['0'])+","      # champs 68, syntax des valeurs et valeur 0
+        SQL_order += "`"+str(i)+"`,"                               # champs 41 à 66                        
+    SQL_order += "`67`) VALUES ("+str(current_state['0'])+","      # champs 67, syntax des valeurs et valeur 0
     for j in range(41,48)+range(61,67):
-        SQL_order = SQL_order + str(current_state[str(j)])+","     # valeurs 41 à 67
-    SQL_order = SQL_order+str(current_state['68'])+");"            # valeur 68
+        SQL_order = SQL_order + str(current_state[str(j)])+","     # valeurs 41 à 66
+    SQL_order = SQL_order+str(current_state['67'])+");"            # valeur 67
     cursor.execute(SQL_order)
     
 
