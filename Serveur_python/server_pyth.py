@@ -80,16 +80,16 @@ def active_connexion(myConnexion, myAdress, q):
             i=0
             max_pos = 5
             min_pos = 2
-            for BOX_nb in range(41,45):
+            for BOX_nb in range(41,48):
                 BOX = str(BOX_nb)
                 if (current_state[BOX]=='1' and sum(dq[BOX])<min_pos):
                     q.put([BOX,'0'])
                     current_state[BOX] = '0'
-                    print "chgt d'etat :"+str(BOX)+" à l'état 0"
+                    LOG.debug("chgt d'etat :"+str(BOX)+" à l'état 0")
                 if (current_state[BOX]=='0' and sum(dq[BOX])>max_pos):
                     q.put([BOX,'1'])
                     current_state[BOX] = '1'
-                    print "chgt d'etat :"+BOX+" à l'état 1"
+                    LOG.debug("chgt d'etat :"+BOX+" à l'état 1")
 
     LOG.info("Connexion perdue avec %s" %(myAdress[0]))
 
@@ -99,10 +99,11 @@ def active_connexion(myConnexion, myAdress, q):
     Pour chaque message, elle sépare le numero du box et son état et renvoie le couple [nom, état]
 """
 def treat_msg_received(msgClient,q):
-    for i in range(0,4):
-        if (msgClient[3*i]+msgClient[3*i+1]==str(41+i)):
-            dq[str(41+i)].append(int(msgClient[3*i+2]))
-            dq[str(41+i)].popleft()
+    for i in range(0,len(msgClient)/3):
+        for BOX_NB in range(41,48):
+            if (msgClient[3*i]+msgClient[3*i+1]==str(BOX_NB)):
+                dq[str(BOX_NB)].append(int(msgClient[3*i+2]))
+                dq[str(BOX_NB)].popleft()
 
 """
     Boucle attendant une nouvelle connexion et créant un nouveau process lançant la fonction active_connexion
@@ -116,6 +117,7 @@ def wait_connexion(stop_event, sock, state_q):
         try:
             connexion, adresse = sock.accept() # Attend la prochaine connexion
             p = Process(target = active_connexion, args=(connexion, adresse, state_q,))
+            p.daemon = True
             p.start()
         except Exception as e:
             if e.errno != 22: #22 est l'exception renvoyée lorsque la connexion est coupée par l'utilisateur
@@ -206,7 +208,7 @@ store_complete_datas(cursor)
 sql_con.commit()
 
 # MAJ DE CURRENT STATE DES BOX ACTIVES
-for i in range(41,45):
+for i in range(41,48):
     current_state[str(i)] = '0'
     state_q.put([str(i),'0'])
 
