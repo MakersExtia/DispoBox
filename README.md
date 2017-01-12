@@ -7,9 +7,9 @@ Détecter la présence de personnes dans les box et afficher l'état de toutes l
 
 ##2. Fonctionnement générale ##
 
-Chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une carte wifi Arduino Huzzah, reliée à plusieurs détecteurs de présence. Il contient également une pile 9v et un pont diviseur de tension afin de mesurer l'autonomie restante.
+Chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une carte wifi Arduino Huzzah, reliée à plusieurs détecteurs de présence, alimenté sur le secteur.
 Le boitier se connecte au wifi et envoie l'état des box sur un serveur local, qui reçoit les infos en TCP grâce à un script python et les stockent dans une base de données MySQL. 
-Le serveur fait également tourner un serveur web qui lui permet de communiquer avec _l'appli Android/la page web_.
+Le serveur fait également tourner un serveur web qui lui permet de communiquer avec l'appli Android.
 
 ##3. Branchements Arduino ##
 <p align="center">
@@ -20,11 +20,11 @@ Capteurs infra-rouge
 
 Box 1 = pin 12
 
-Box 2 = pin 14
+Box 2 = pin 13
 
-Box 3 = pin 16
+Box 3 = pin 14
 
-Box 4 = pin 13
+Box 4 = pin 15
 
 
 ##4. Fonctionnement programme par programme ##
@@ -46,7 +46,7 @@ MDP : boxdispo
 
 Trois thread sont lancés automatiquement, et un nouveaux process de communication est crée dès qu'un nouveau matériel se connecte en TCP.
 - _main_ : crée la connexion TCP, se connecte la base de données SQL _nomdeladb_ , lance le thread _active_con_ et attend qu'on appuie sur une touche pour fermer toutes les connexions et arréter le programme.
-- _active_connexion_ : ouvre une connexion TCP et attend que quel'qu'un se connecte. A chaque connexion, crée un process propre à la connexion qui gère la connexion. Elle reçoit l'état des capteurs et met ces infos dans la base de données _nomdeladb_.
+- _active_connexion_ : ouvre une connexion TCP et attend que quelqu'un se connecte. A chaque connexion, crée un process propre à la connexion qui gère la connexion. Elle reçoit l'état des capteurs et met ces infos dans la base de données _nomdeladb_. En dehors des heures de fonctionnement, elle met le huzzah en mode _deep sleep_.
 - _MAJ_current_state_ : boucle qui récupère chaque nouvelle valeur dans la queue pour la mettre à jour dans la base de données SQL.
 
 **MySQL**
@@ -69,12 +69,10 @@ stats : garde toutes les infos depuis le début du lancement du projet.
 
 
 ### - Code Arduino HUZZAH ###
-Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence ainsi qu'une pile et un pont diviseur de tension.
+Chaque Huzzah est connecté à 3 ou 4 détecteurs de présence.
 - Connexion au réseau TCP : la librairie [ESP8266WiFi.h](https://github.com/ekstrand/ESP8266wifi) permet de communiquer en wifi. 
-- La fonction _setup()_ : connection au réseau wifi.
-- La fonction _loop()_ : recherche d'un serveur TCP, s'y connecte, puis envoie l'état des capteurs ou entre en veille et envoie son niveau de batterie restant (grâce au pont diviseur de tension) en fonction de la réponse serveur.
-
-
+- La fonction _setup()_ : connexion au réseau wifi, puis crée la connexion TCP.
+- La fonction _loop()_ : reçoie les infos du serveur. Il peut envoyer deux types de messaes, soit *datas* dans quel cas on renvoi l'état courant des capteurs IR, soit un nombre, correspondant au nombre de secondes pendant lesquels le module doit se mettre en _deep sleep_.
 
 
 ### - Serveur web ###
