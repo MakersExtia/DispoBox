@@ -2,7 +2,7 @@
 
 // Paramètres du connexion
 const char* ssid     = "Extia-Int4";
-const char* password = "";
+const char* password =
 // IP du serveur Extia :
 const char* host = "150.16.21.40";
 
@@ -12,8 +12,8 @@ bool CONNECTED = false;
 
 // Les GPIO
 int IRpin1 = 12;
-int IRpin2 = 14;
-int IRpin3 = 16;
+int IRpin2 = 13;
+int IRpin3 = 14;
 
 // NUMEROS DES BOX
 String BOX1 = "45";
@@ -47,6 +47,14 @@ void loop() {
       client.print(BOX1+String(digitalRead(IRpin1))+BOX2+String(digitalRead(IRpin2))+BOX3+String(digitalRead(IRpin3)));
     }
     else {
+      int sleep_time = question.toInt();
+      if (sleep_time >0) {
+        client.print("Je vais dormir pendant : " + question +" secondes");
+        ESP.deepSleep(sleep_time * 1000000); 
+      }
+      else {
+        client.print("Etrange, j'ai recu : "+question);
+      }
     }    
     delay(100);
     question = "";
