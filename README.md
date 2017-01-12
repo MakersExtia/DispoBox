@@ -245,6 +245,8 @@ Voici quelques propositions, laides mais pouvant donner des idées :
 
 ##6. Les boitiers à imprimer en 3D ##
 On a deux types de boitier, l'un pour placer le Huzzah et bloquer les fils, l'autre pour accrocher les capteurs IR au plafond :
+
 Carter pour Huzzah : https://github.com/MakersExtia/DispoBox/blob/master/Modeles%203D/carter_moyen.stl
+
 Boitier pour capteur IR : https://github.com/MakersExtia/DispoBox/blob/master/Modeles%203D/support_IR.STL
 
