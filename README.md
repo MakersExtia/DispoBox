@@ -4,7 +4,6 @@
 Détecter la présence de personnes dans les box et afficher l'état de toutes les box sur une _appli android/page web_ (cartes 4ème et 6ème étage, rouge = occupé = etat 1, vert = libre = etat 0, gris = aucune info/système éteint = etat -1).
 
 
-
 ##2. Fonctionnement générale ##
 
 Chaque étage comporte plusieurs boitiers wifi. Chaque boitier contient une carte wifi Arduino Huzzah, reliée à plusieurs détecteurs de présence, alimenté sur le secteur.
@@ -26,6 +25,10 @@ Box 3 = pin 14
 
 Box 4 = pin 15
 
+La PIN 16 est reliée à RST : c'est obligatoire pour que le Huzzah puisse se mettre et sortir du mode _deep sleep_.
+
+### Electronique ###
+Quelques manipulations sont à faire : il faut relier toutes les masses des capteurs IR et toutes les alimentations, puisqu'on a une seule sortie sur le Huzzah. Pour chaque capteur, il faut également préparer les cables (dénuder et mettre les embouts adéquat).
 
 ##4. Fonctionnement programme par programme ##
 ###     - Serveur Python ###
@@ -240,3 +243,5 @@ Voici quelques propositions, laides mais pouvant donner des idées :
 </p>
 
 
+##6. Les boitiers à imprimer en 3D ##
+On a deux types de boitier, l'un pour placer le Huzzah et bloquer les fils, l'autre pour accrocher les capteurs IR au plafond :
