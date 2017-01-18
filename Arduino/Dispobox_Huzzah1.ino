@@ -2,7 +2,7 @@
 
 // Paramètres du connexion
 const char* ssid     = "Extia-Int4";
-const char* password = 
+const char* password = "";
 // IP du serveur Extia :
 const char* host = "150.16.21.40";
 
@@ -28,6 +28,7 @@ String BOX4 = "44";
 void setup() {
   Serial.println("----------------- DANS LE SETUP ------------------");
   Serial.begin(115200);
+  pinMode(IRpin1, INPUT);  pinMode(IRpin2, INPUT);  pinMode(IRpin3, INPUT);  pinMode(IRpin4, INPUT);
   delay(1000);
   connect_wifi();
   Serial.println("------------------ FIN DU SETUP ------------------");
@@ -43,6 +44,11 @@ void loop() {
     setup();
   }
   else {
+    question = client.readStringUntil('#');
+    if (question == "datas") {
+      client.print(BOX1+String(digitalRead(IRpin1))+BOX2+String(digitalRead(IRpin2))+BOX3+String(digitalRead(IRpin3))+BOX4+String(digitalRead(IRpin4)));
+    }
+    else {
       int sleep_time = question.toInt();
       if (sleep_time >0) {
         client.print("Je vais dormir pendant : " + question +" secondes");
