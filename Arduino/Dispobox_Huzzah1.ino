@@ -6,16 +6,15 @@ const char* password = "";
 // IP du serveur Extia :
 const char* host = "150.16.21.40";
 
-
 String question;
 WiFiClient client;
 bool CONNECTED = false;
 
 // Les GPIO
 int IRpin1 = 12;
-int IRpin2 = 14;
-int IRpin3 = 16;
-int IRpin4 = 13;
+int IRpin2 = 13;
+int IRpin3 = 14;
+int IRpin4 = 15;
 
 // NUMEROS DES BOX
 String BOX1 = "41";
@@ -29,6 +28,7 @@ String BOX4 = "44";
 void setup() {
   Serial.println("----------------- DANS LE SETUP ------------------");
   Serial.begin(115200);
+  pinMode(IRpin1, INPUT);  pinMode(IRpin2, INPUT);  pinMode(IRpin3, INPUT);  pinMode(IRpin4, INPUT);
   delay(1000);
   connect_wifi();
   Serial.println("------------------ FIN DU SETUP ------------------");
@@ -49,6 +49,14 @@ void loop() {
       client.print(BOX1+String(digitalRead(IRpin1))+BOX2+String(digitalRead(IRpin2))+BOX3+String(digitalRead(IRpin3))+BOX4+String(digitalRead(IRpin4)));
     }
     else {
+      int sleep_time = question.toInt();
+      if (sleep_time >0) {
+        client.print("Je vais dormir pendant : " + question +" secondes");
+        ESP.deepSleep(sleep_time * 1000000); 
+      }
+      else {
+        client.print("Etrange, j'ai recu : "+question);
+      }
     }    
     delay(100);
     question = "";
