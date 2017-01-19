@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import logger, logging, errno
-import threading, socket, sys, time, mysql.connector
+import logger, logging, errno, signal
+import threading, socket, sys, time, mysql.connector, datetime
 from mysql.connector import errorcode as errorDB
 from multiprocessing import Process, Queue
 import multiprocessing
@@ -22,33 +22,46 @@ all_data_table = "stats"
 
 # Etat actuel des box (utilité à démontrer)
 current_state = {'0' : '-1',
-        '41' : '-1',
-        '42' : '-1',
-        '43' : '-1',
-        '44' : '-1',
-        '45' : '-1',
-        '46' : '-1',
-        '47' : '-1',
-        '48' : '-1',
-        '61' : '-1',
-        '62' : '-1',
-        '63' : '-1',
-        '64' : '-1',
-        '65' : '-1',
-        '66' : '-1',
-        '67' : '-1',
-        '68' : '-1'}
+                '41' : '-1',        '42' : '-1',        '43' : '-1',        '44' : '-1',        '45' : '-1',        '46' : '-1',        '47' : '-1',        '48' : '-1',
+                '61' : '-1',        '62' : '-1',        '63' : '-1',        '64' : '-1',        '65' : '-1',        '66' : '-1',        '67' : '-1',        '68' : '-1'}
 
-dq = {'41' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-      '42' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-      '43' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-      '44' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-      '45' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-      '46' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]),
-      '47' : deque([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])}
+size_deque = 60 
+dq41 = deque([0])
+dq42 = deque([0])
+dq43 = deque([0])
+dq44 = deque([0])
+dq45 = deque([0])
+dq46 = deque([0])
+dq47 = deque([0])
+dq61 = deque([0])
+dq62 = deque([0])
+dq63 = deque([0])
+dq64 = deque([0])
+dq65 = deque([0])
+dq66 = deque([0])
+dq67 = deque([0])
+dq68 = deque([0])
+
+for i in range(0,size_deque):
+    dq41.append(0)
+    dq42.append(0)
+    dq43.append(0)
+    dq44.append(0)
+    dq45.append(0)
+    dq46.append(0)
+    dq47.append(0)
+    dq61.append(0)
+    dq62.append(0)
+    dq63.append(0)
+    dq64.append(0)
+    dq65.append(0)
+    dq66.append(0)
+    dq67.append(0)
+    dq68.append(0)
 
 
-
+dq = {'41' : dq41, '42' : dq42,'43' : dq43,'44' : dq44,'45' : dq45,'46' : dq46, '47' : dq47,
+      '61' : dq61, '62' : dq62,'63' : dq63,'64' : dq64,'65' : dq65,'66' : dq66, '67' : dq67, '68' : dq68}
 
 
 """
@@ -61,8 +74,12 @@ def active_connexion(myConnexion, myAdress, q):
     connected = True
     i=0
     while connected:
-        if i<10:
-            myConnexion.send("datas#")
+        if i<20:
+            try:
+                myConnexion.send("datas#")
+            except Exception as e:
+                LOG.error("Exception renvoyée lors de l'envoi de données : "+str(e))
+                connected = False
             try:
                 msgClient = myConnexion.recv(1024)
             except Exception as e:
@@ -77,19 +94,26 @@ def active_connexion(myConnexion, myAdress, q):
                 time.sleep(0.5)
             i=i+1
         else:
-            i=0
-            max_pos = 5
-            min_pos = 2
-            for BOX_nb in range(41,48):
-                BOX = str(BOX_nb)
-                if (current_state[BOX]=='1' and sum(dq[BOX])<min_pos):
-                    q.put([BOX,'0'])
-                    current_state[BOX] = '0'
-                    LOG.debug("chgt d'etat :"+str(BOX)+" à l'état 0")
-                if (current_state[BOX]=='0' and sum(dq[BOX])>max_pos):
-                    q.put([BOX,'1'])
-                    current_state[BOX] = '1'
-                    LOG.debug("chgt d'etat :"+BOX+" à l'état 1")
+            # On verifie qu'on est bien dans une periode pendant laquelle le Dispobox doit être actif
+            if active_time(myConnexion): 
+                i=0
+                max_pos = 5
+                min_pos = 2
+                for BOX_nb in range(41,48)+range(61,68):
+                    BOX = str(BOX_nb)
+                    if (current_state[BOX]=='1' and sum(dq[BOX])<min_pos):
+                        q.put([BOX,'0'])
+                        current_state[BOX] = '0'
+                        LOG.debug("chgt d'etat :"+str(BOX)+" à l'état 0")
+                    if (current_state[BOX]=='0' and sum(dq[BOX])>max_pos):
+                        q.put([BOX,'1'])
+                        current_state[BOX] = '1'
+                        LOG.debug("chgt d'etat :"+BOX+" à l'état 1")
+            else:
+                i=0
+                current_state[0] = '-1'
+                q.put(['0','-1'])
+                connected = False
 
     LOG.info("Connexion perdue avec %s" %(myAdress[0]))
 
@@ -100,7 +124,7 @@ def active_connexion(myConnexion, myAdress, q):
 """
 def treat_msg_received(msgClient,q):
     for i in range(0,len(msgClient)/3):
-        for BOX_NB in range(41,48):
+        for BOX_NB in range(41,48)+range(61,69):
             if (msgClient[3*i]+msgClient[3*i+1]==str(BOX_NB)):
                 dq[str(BOX_NB)].append(int(msgClient[3*i+2]))
                 dq[str(BOX_NB)].popleft()
@@ -156,14 +180,47 @@ def MAJ_current_state(sql_connexion, stop_event, q, cursor):
 def store_complete_datas(cursor):
     # On cree la requete SDQL ne premiere fois
     SQL_order = "INSERT INTO "+all_data_table+" (`0`,"             # syntaxe de debut et champ '0'
-    for i in range(41,48)+range(61,67):
+    for i in range(41,48)+range(61,68):
         SQL_order += "`"+str(i)+"`,"                               # champs 41 à 66                        
-    SQL_order += "`67`) VALUES ("+str(current_state['0'])+","      # champs 67, syntax des valeurs et valeur 0
-    for j in range(41,48)+range(61,67):
-        SQL_order = SQL_order + str(current_state[str(j)])+","     # valeurs 41 à 66
-    SQL_order = SQL_order+str(current_state['67'])+");"            # valeur 67
+    SQL_order += "`68`) VALUES ("+str(current_state['0'])+","      # champs 67, syntax des valeurs et valeur 0
+    for j in range(41,48)+range(61,68):
+        SQL_order +=  str(current_state[str(j)])+","               # valeurs 41 à 66
+    SQL_order = SQL_order+str(current_state['68'])+");"            # valeur 67
     cursor.execute(SQL_order)
     
+
+"""
+    Verifie le jour et l'heure actuelle et met let en sleep mode le huzzah si on est en dehors des heures de fonctionnement
+    renvoi True si le huzza doit être actif
+"""
+def active_time(myConnexion):
+    h_deb = 9
+    h_fin = 21
+    # On retourne True si on est en semaine entre h_deb et h_fin
+    maintenant = datetime.datetime.now()        # objet contenant l'annee, le moi, le jour, l'heure, etc...
+    jour = datetime.datetime.today().weekday()  # jour de la semaine entre 0 et 6
+    if (jour < 5) and maintenant.hour >= h_deb and maintenant.hour < h_fin:
+        return True
+    else:
+        # Definition du temps durant lequel le huzzah doit dormir en secondes : sleeptime
+        if (jour > 5): # Le week end
+            # L'heure du reveil est le prochain lundi à h_deb.  
+            temps_reveil = maintenant.replace(day = maintenant.day+(7-jour),hour = h_deb, minute = 0)
+            sleeptime = temps_reveil-maintenant
+            sleeptime = sleeptime.seconds
+        else: # En semaine
+            if maintenant.hour < h_deb: 
+                sleeptime = maintenant.replace(hour=h_deb, minute = 0) - maintenant
+                sleeptime = sleeptime.seconds
+            if maintenant.hour >= h_fin:
+                sleeptime = maintenant - maintenant.replace(hour=h_deb, minute = 0)
+                sleeptime = sleeptime.seconds + 24*60*60
+        print "************* SLEEP MODE *************"
+        print "** "+str(sleeptime//60)+" MINUTES & "+str(sleeptime%60)+" SECONDES **"
+        print " "
+        sleeptime = 30
+        myConnexion.send(str(sleeptime)+"#")
+        return False
 
 
 LOG=logger.create_logger()
@@ -171,14 +228,13 @@ LOG.info("##################################################")
 LOG.info("#######         Lancement du serveur        ######") 
 LOG.info("##################################################")
 
-
 # Connexion au serveur MySQL
 try:
     sql_con = mysql.connector.connect(**dbConfig)
     cursor = sql_con.cursor()
 except mysql.connector.Error as err :
     if err.errno == errorDB.ER_ACCESS_DENIED_ERROR:
-        LOG.error("L'utilisateur ou le mot de passe mysql n'est pas le bon.")
+        LOG.error("probleme de droit d'acces à la BDD mysql")
     elif err.errno == errorDB.ER_BAD_DB_ERROR:
         LOG.error("La base de données demandée n'existe pas sur ce serveur")
     else:
@@ -208,7 +264,7 @@ store_complete_datas(cursor)
 sql_con.commit()
 
 # MAJ DE CURRENT STATE DES BOX ACTIVES
-for i in range(41,48):
+for i in range(41,48)+range(61,69):
     current_state[str(i)] = '0'
     state_q.put([str(i),'0'])
 
@@ -228,7 +284,6 @@ print("#######           EXITING PROGRAM           ######")
 print("##################################################")
 
 
-#cursor.execute("UPDATE current_state SET state = -1 WHERE name = 0")
 cursor.execute("UPDATE current_state SET state = -1")
 current_state["0"]= -1
 store_complete_datas(cursor)
