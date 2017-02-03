@@ -1,0 +1,41 @@
+page-home {
+	.toolbar-background {
+		background-color: #28282e;
+	}
+
+	.toolbar-title {
+		color: white;
+
+		strong {
+			color: #f26e25;
+		}
+	}
+
+	.card {
+		.card-header {
+			padding: 0;
+		}
+
+		.card-content {
+			margin-top: 15px;
+
+			h2 {
+				font-size: 1.2em;
+				color: #28282e;
+			}
+
+			p {
+				color: #838390;
+				font-size: 0.8em;
+			}
+
+			button {
+				background-color: transparent;
+				color: #f26e25;
+				font-size: 1em;
+				padding: 0;
+				margin-top: 15px;
+			}
+		}
+	}
+}
