@@ -20,6 +20,7 @@ export class DataService {
   private dataService: any;
   private boxes: Box[];
   private requestedFloor: number;
+  private doGetFloors: boolean;
 
   constructor(
     private httpService: HTTPService,
@@ -68,10 +69,11 @@ export class DataService {
     this.loadData();
   }
 
-  getFloorData(floorNumber: number, doRefresh: boolean) {
+  getFloorData(floorNumber: number, doGetFloors: boolean, doRefresh: boolean) {
     if (doRefresh) this.areDataLoaded = false;
     this.requestType = REQUEST_TYPES.FLOOR;
     this.requestedFloor = floorNumber;
+    this.doGetFloors = doGetFloors;
     this.loadData();
   }
 
@@ -88,7 +90,7 @@ export class DataService {
         this.notifyObservers({ status: RESPONSE_CODES.READY, data: this.retrieveFloorsFromBoxes() });
         break;
       case REQUEST_TYPES.FLOOR:
-        this.notifyObservers({ status: RESPONSE_CODES.READY, data: this.retrieveFloorData() });
+        this.notifyObservers({ status: RESPONSE_CODES.READY, data: this.retrieveFloorData(), floors: this.doGetFloors ? this.retrieveFloorsFromBoxes() : [] });
         break;
     }
   }

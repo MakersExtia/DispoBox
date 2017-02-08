@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Etages e<strong>X</strong>tia
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let floor of floors">
+    <ion-card-header>
+      <img src="assets/img/photo-etage.jpg" />
+    </ion-card-header>
+    <ion-card-content>
+      <h2>Etage {{ floor.floorNumber }}</h2>
+      <p>{{ floor.numberAvailableBoxes }} boxes libres sur {{ floor.numberTotalBoxes }}</p>
+      <button (click)="goToFloor(floor.floorNumber)">Aller à l'étage</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
