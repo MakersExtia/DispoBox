@@ -1,6 +1,7 @@
 # Installation de l'environnement
 
 Installer les outils suivants :
+
 1. NodeJS (https://nodejs.org/en/download/)
 
 Une fois NodeJS installé, ouvrir une console et 
@@ -23,9 +24,14 @@ L'option lab permet d'avoir en parallèle une vue iOS et Android. (Attention, ce
 Pour émuler un mobile, il faut installer une platform dans le projet ainsi que les outils standard de cette plateforme (compilateur, SDK, etc).
 Pour Android, il faut d'abord suivre les instructions ici : https://ionicframework.com/docs/v2/resources/platform-setup/mac-setup.html
 Puis dans une console :
+
 1. Se placer dans le projet
+
 2. Faire ionic add platform android
+
 3. ionic run android
+
+
 Si aucun téléphone n'est branché au PC en mode debug, cela va lancer l'émulateur (pour Android il faut un AVD).
 
 ## Ionic view
