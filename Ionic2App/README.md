@@ -4,7 +4,9 @@ Installer les outils suivants :
 1. NodeJS (https://nodejs.org/en/download/)
 
 Une fois NodeJS installé, ouvrir une console et 
+
 1. npm install -g cordova (nécessite peut-être sudo)
+
 2. npm install -g ionic (nécessite peut-être sudo)
 
 Télécharger les sources et se placer dans le dossier puis faire
