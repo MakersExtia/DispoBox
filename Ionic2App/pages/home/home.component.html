@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+      </svg>
+    </button>
+    <ion-title>
+      Etages e<strong>X</strong>tia
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="allOccupied === true">
+    Désolé mais aucun box n'est libre. Regarde plutôt vers les <button (click)="goToCalendar()">salles réservables</button>
+  </div>
+  <ion-card *ngFor="let floor of floors">
+    <ion-card-content>
+      <h2>Etage {{ floor.floorNumber }}</h2>
+      <p><span class="boxes-availables">{{ floor.numberAvailableBoxes }}</span> boxes libres sur {{ floor.numberTotalBoxes }}</p>
+      <button (click)="goToFloor(floor.floorNumber)">Aller à l'étage</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

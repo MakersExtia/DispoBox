@@ -1,0 +1,149 @@
+page-floor {
+	.toolbar-background {
+		background-color: $extia-black;
+	}
+
+	.bar-button-default {
+		svg {
+			fill: white;
+		}
+	}
+
+	.toolbar-title {
+		color: white;
+
+		strong {
+			color: $extia-orange;
+		}
+	}
+
+	h2 {
+		color: #28282e;
+		text-align: center;
+		font-size: 1.3em;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0 5% 10%;
+		width: 90%;
+	}
+
+	.floor-button-wrapper {
+		button {
+			font-size: 0.9em;
+			background-color: #f26e25;
+			color: white;
+		}
+	}
+
+	.box {
+		width: 50px;
+		position: absolute;
+	}
+
+	.box-content {
+		position: relative;
+
+		.box-marker {
+			svg {
+				width: 40px;
+				height: 40px;
+				fill: #28282e;
+
+				&.free {
+					fill: #f26e25;
+				}
+			}
+		}
+
+		.box-name {
+			position: absolute;
+			top: 13%;
+			left: 23%;
+			color: white;
+			font-weight: bold;
+		}
+	}
+
+	.map-section {
+		position: relative;
+
+		.map-image {
+
+		}
+
+		.map-infos {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.legend {
+		margin-top: 3%;
+		text-align: center;
+		
+		.legend-item {
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 10%;
+		}
+
+		.label, .explanation {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.label {
+			svg {
+				width: 40px;
+				height: 40px;
+			}
+
+			&.label-free {
+				svg {
+					fill: #f26e25;
+				}
+			}
+		}
+	}
+
+	.box-41 {
+		top: 3%;
+		left: 56%;
+	}
+
+	.box-42 {
+		top: 10%;
+		left: 65%;
+	}
+
+	.box-43 {
+		top: 17%;
+		left: 74%;
+	}
+
+	.box-44 {
+		top: 24%;
+		left: 83%;
+	}
+
+	.box-45 {
+		top: 30%;
+		left: 5%;
+	}
+
+	.box-46 {
+		top: 39%;
+		left: 12%;
+	}
+
+	.box-47 {
+		top: 49%;
+		left: 20%;
+	}
+}

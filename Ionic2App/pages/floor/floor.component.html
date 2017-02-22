@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+      </svg>
+    </button>
+    <ion-title>
+      Etage <strong>{{ floorNumber }}</strong>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div>
+    <h2>Changer d'étage</h2>
+    <ul class="floor-button-wrapper">
+      <li *ngFor="let floor of floorsDifferentFromCurrent">
+        <button ion-button block (click)="goToFloor(floor.floorNumber)">Voir l'étage {{ floor.floorNumber }}</button>
+      </li>
+    </ul>
+  </div>
+  <div class="map-section-wrapper">
+    <h2>Boxes</h2>
+    <div class="map-section">
+      <div class="map-image">
+        <img src="assets/img/4_etage.jpg" />
+      </div>
+      <div class="map-infos">
+        <div class="box box-{{ box.name }}" *ngFor="let box of floorData">
+          <div class="box-content">
+            <div class="box-marker">
+              <svg viewBox="0 0 512 512" [ngClass]="{free: box.state === -1}" >
+                <path d="M256,0C158.897,0,88.276,80.331,88.276,167.724c0,52.966,18.538,81.214,43.255,132.414
+                C180.966,402.538,256,512,256,512s75.034-109.462,124.469-211.862c24.717-51.2,43.255-79.448,43.255-132.414
+                C423.724,80.331,353.103,0,256,0"/>
+                <path d="M285.131,100.634L206.566,179.2l-12.359,50.317l50.317-12.359l78.566-78.566
+                c5.297-5.297,5.297-13.241,0-18.538l-19.421-19.421C298.372,96.221,290.428,96.221,285.131,100.634"/>
+                <rect x="272.921" y="115.817" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 581.5951 43.6936)" width="17.655" height="52.965"/>
+              </svg>
+            </div>
+            <div class="box-name">
+              {{ box.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <h2>Légende</h2>
+    <div class="legend-item">
+      <div class="label">
+        <svg viewBox="0 0 512 512" >
+          <path d="M256,0C158.897,0,88.276,80.331,88.276,167.724c0,52.966,18.538,81.214,43.255,132.414
+          C180.966,402.538,256,512,256,512s75.034-109.462,124.469-211.862c24.717-51.2,43.255-79.448,43.255-132.414
+          C423.724,80.331,353.103,0,256,0"/>
+          <path d="M285.131,100.634L206.566,179.2l-12.359,50.317l50.317-12.359l78.566-78.566
+          c5.297-5.297,5.297-13.241,0-18.538l-19.421-19.421C298.372,96.221,290.428,96.221,285.131,100.634"/>
+          <rect x="272.921" y="115.817" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 581.5951 43.6936)" width="17.655" height="52.965"/>
+        </svg>
+      </div>
+      <div class="explanation">
+        Occupé
+      </div>
+    </div>
+    <div class="legend-item">
+      <div class="label label-free">
+        <svg viewBox="0 0 512 512">
+          <path d="M256,0C158.897,0,88.276,80.331,88.276,167.724c0,52.966,18.538,81.214,43.255,132.414
+          C180.966,402.538,256,512,256,512s75.034-109.462,124.469-211.862c24.717-51.2,43.255-79.448,43.255-132.414
+          C423.724,80.331,353.103,0,256,0"/>
+          <path d="M285.131,100.634L206.566,179.2l-12.359,50.317l50.317-12.359l78.566-78.566
+          c5.297-5.297,5.297-13.241,0-18.538l-19.421-19.421C298.372,96.221,290.428,96.221,285.131,100.634"/>
+          <rect x="272.921" y="115.817" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 581.5951 43.6936)" width="17.655" height="52.965"/>
+        </svg>
+      </div>
+      <div class="explanation">
+        Libre
+      </div>
+    </div>
+  </div>
+</ion-content>
