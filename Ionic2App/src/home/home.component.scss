@@ -1,40 +1,46 @@
 page-home {
 	.toolbar-background {
-		background-color: #28282e;
+		background-color: $extia-black;
+	}
+
+	.bar-button-default {
+		svg {
+			fill: white;
+		}
 	}
 
 	.toolbar-title {
 		color: white;
 
 		strong {
-			color: #f26e25;
+			color: $extia-orange;
 		}
 	}
 
 	.card {
-		.card-header {
-			padding: 0;
-		}
-
 		.card-content {
-			margin-top: 15px;
-
 			h2 {
-				font-size: 1.2em;
+				font-size: 1.5em;
 				color: #28282e;
 			}
 
 			p {
 				color: #838390;
-				font-size: 0.8em;
+				font-size: 1.2em;
+
+				.boxes-availables {
+					color: $extia-orange;
+				}
 			}
 
 			button {
 				background-color: transparent;
-				color: #f26e25;
+				color: white;
+				background-color: $extia-orange;
 				font-size: 1em;
-				padding: 0;
+				padding: 10px 20px;
 				margin-top: 15px;
+				text-transform: uppercase;
 			}
 		}
 	}

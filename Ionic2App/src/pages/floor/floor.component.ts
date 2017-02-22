@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { DataService } from '../../services/data.service';
+import { Nav, NavParams } from 'ionic-angular';
+import { DataService } from '../../services/index';
 import { Box } from '../../models/box.model';
 import { Floor } from '../../models/floor.model';
 import { RESPONSE_CODES } from '../../config/return-codes.config';
@@ -14,22 +14,22 @@ export class FloorPage implements OnInit {
   public floorNumber: number;
   public floors: any;
   public floorData: any;
-  private isDefault: boolean;
-  private floorsDifferentFromCurrent: any;
+  public floorsDifferentFromCurrent: any;
+  private default: boolean;
 
   constructor(
-    private nav: NavController,
+    private nav: Nav,
     private navParams: NavParams,
     private dataService: DataService
   ) {
     this.floorNumber = navParams.get('floor');
     if (this.floorNumber !== undefined) {
-      this.isDefault = false;
+      this.default = false;
       this.floors = navParams.get('floors');
       this.floorsDifferentFromCurrent = this.floors.filter(floor => floor.floorNumber !== this.floorNumber);
     } else {
       this.floorNumber = DEFAULT_FLOOR_NUMBER;
-      this.isDefault = true;
+      this.default = true;
     }
   }
 
@@ -39,6 +39,18 @@ export class FloorPage implements OnInit {
 
   ionViewWillEnter() {
     this.getFloorData(false);
+  }
+
+  isDefault() {
+    return this.default;
+  }
+
+  setDefault(def: boolean) {
+    this.default = def;
+  }
+
+  getDataService() {
+    return this.dataService;
   }
 
   doRefresh(refresher) {
@@ -58,17 +70,17 @@ export class FloorPage implements OnInit {
 
   fetchData(data: Box[], floors: Floor[]) {
     this.floorData = data;
-    if (this.isDefault) {
+    if (this.default) {
       this.floors = floors;
       this.floorsDifferentFromCurrent = this.floors.filter(floor => floor.floorNumber !== this.floorNumber);
     }
   }
 
   getFloorData(doRefresh: boolean) {
-    this.dataService.getFloorData(this.floorNumber, this.isDefault, doRefresh ? doRefresh : false);
+    this.dataService.getFloorData(this.floorNumber, this.default, doRefresh ? doRefresh : false);
   }
 
   goToFloor(floorNumber: number) {
-    this.nav.push(FloorPage, { floor: floorNumber, floors: this.floors });
+    this.nav.setRoot(FloorPage, { floor: floorNumber, floors: this.floors });
   }
 }

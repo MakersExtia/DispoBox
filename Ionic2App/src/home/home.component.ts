@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Nav } from 'ionic-angular';
 import { DataService } from '../../services/data.service';
 import { FloorPage } from '../floor/floor.component';
+import { CalendarPage } from '../calendar/calendar.component';
 import { RESPONSE_CODES } from '../../config/return-codes.config';
 
 @Component({
@@ -10,9 +11,10 @@ import { RESPONSE_CODES } from '../../config/return-codes.config';
 })
 export class HomePage implements OnInit {
   public floors;
+  private allOccupied: boolean = true;
 
   constructor(
-    public nav: NavController,
+    public nav: Nav,
     private dataService: DataService
   ) { }
 
@@ -24,7 +26,16 @@ export class HomePage implements OnInit {
     this.getFloors(false);
   }
 
+  areAllOccupied() {
+    return this.allOccupied;
+  }
+
+  getDataService() {
+    return this.dataService;
+  }
+
   doRefresh(refresher) {
+    this.floors = [];
     this.getFloors(true);
     setTimeout(() => {
       refresher.complete();
@@ -41,6 +52,10 @@ export class HomePage implements OnInit {
 
   fetchData(data: any) {
     this.floors = data;
+    this.floors.forEach(floor => {
+      if (floor.numberAvailableBoxes > 0)
+        this.allOccupied = false;
+    });
   }
 
   getFloors(doRefresh: boolean) {
@@ -48,6 +63,10 @@ export class HomePage implements OnInit {
   }
 
   goToFloor(floorNumber: number) {
-    this.nav.push(FloorPage, { floor: floorNumber, floors: this.floors });
+    this.nav.setRoot(FloorPage, { floor: floorNumber, floors: this.floors });
+  }
+
+  goToCalendar() {
+    this.nav.setRoot(CalendarPage);
   }
 }

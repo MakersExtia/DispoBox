@@ -14,3 +14,39 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+$extia-black: #28282e;
+$extia-orange: #f26e25;
+
+.menu-inner {
+	&>ion-toolbar {
+		border-bottom: 2px solid $extia-orange;
+
+		.toolbar-background {
+			background-color: $extia-black;
+		}
+
+		.toolbar-content {
+			.toolbar-title-md {
+				color: $extia-orange;
+			}
+		}
+	}
+
+	&>ion-content {
+		background-color: $extia-black;
+
+		.scroll-content {
+			margin-top: 20%;
+
+			.item {
+				color: #FFFFFF;
+				background-color: $extia-black;
+
+				.item-inner {
+					border-bottom: 1px solid $extia-orange;
+				}
+			}
+		}
+	}
+}

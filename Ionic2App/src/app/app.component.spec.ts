@@ -1,5 +1,5 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { IonicModule } from 'ionic-angular';
+import { Nav, Platform, MenuController, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home.component';
 
@@ -35,5 +35,17 @@ describe('Component: Root Component', () => {
 
   it('initialises with a root page of HomePage', () => {
     expect(comp['rootPage']).toBe(HomePage);
+  });
+
+  describe('openPage', () => {
+    beforeAll(() => {
+      spyOn(Nav.prototype, 'setRoot');
+    });
+
+    it('should change page', () => {
+      let page = { title: 'Boxes', component: HomePage };
+      comp.openPage(page);
+      expect(Nav.prototype.setRoot).toHaveBeenCalled();
+    });
   });
 });

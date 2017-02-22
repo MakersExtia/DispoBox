@@ -4,8 +4,10 @@ import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { 
   HOST,
-  GET_ALL_BOXES_ACTION
+  GET_ALL_BOXES_ACTION,
+  GOOGLE_VALIDATION_TOKEN_ENDPOINT
 } from '../config/api.config';
+import { RESPONSE_CODES } from '../config/return-codes.config';
 
 @Injectable()
 export class HTTPService {
@@ -17,8 +19,17 @@ export class HTTPService {
   getAllBoxes() {
     this.http.get(HOST + GET_ALL_BOXES_ACTION, new RequestOptions({ headers: this.getHeaders() }))
       .subscribe(
-        data => this.mapDataAndNotify(data)
+        data => this.mapDataAndNotify(data, RESPONSE_CODES.OK)
       );
+  }
+
+  validateGoogleToken(token: string) {
+    this.http.get(GOOGLE_VALIDATION_TOKEN_ENDPOINT + token, new RequestOptions({ headers: this.getHeaders() }))
+      .subscribe(response => {
+        this.mapDataAndNotify(response, RESPONSE_CODES.CHECK_TOKEN);
+      }, error => {
+        this.mapDataAndNotify(error, RESPONSE_CODES.CHECK_TOKEN);
+      });
   }
 
   getHeaders() {
@@ -26,8 +37,8 @@ export class HTTPService {
     return headers;
   }
 
-  mapDataAndNotify(data: Response) {
+  mapDataAndNotify(data: Response, code: number) {
     this.data = data.json();
-    this.fetched.emit('event');
+    this.fetched.emit(code);
   }
 }

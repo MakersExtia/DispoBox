@@ -1,23 +1,26 @@
 page-floor {
 	.toolbar-background {
-		background-color: #28282e;
+		background-color: $extia-black;
+	}
+
+	.bar-button-default {
+		svg {
+			fill: white;
+		}
 	}
 
 	.toolbar-title {
 		color: white;
 
 		strong {
-			color: #f26e25;
+			color: $extia-orange;
 		}
-	}
-
-	.back-button {
-		color: #f26e25;
 	}
 
 	h2 {
 		color: #28282e;
 		text-align: center;
+		font-size: 1.3em;
 	}
 
 	ul {

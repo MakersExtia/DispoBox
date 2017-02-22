@@ -1,0 +1,64 @@
+page-calendar {
+	.toolbar-background {
+		background-color: $extia-black;
+	}
+
+	.bar-button-default {
+		svg {
+			fill: white;
+		}
+	}
+
+	.toolbar-title {
+		color: white;
+
+		strong {
+			color: $extia-orange;
+		}
+	}
+
+	.loader {
+		position: absolute;
+		z-index: 9999;
+		left: 25%;
+		top: 15%;
+		width: 50%;
+
+		img {
+			width: 100%;
+		}
+	}
+
+	.card {
+		.card-header-md {
+			font-size: 1.5em;
+			color: $extia-black;
+		}
+
+		.card-content {
+			h2 {
+				font-size: 1.2em;
+			}
+
+			.event-time {
+				font-size: 0.8em;
+				color: $extia-orange;
+			}
+
+			.no-reservation {
+				font-size: 0.8em;
+				color: $extia-orange;
+			}
+		}
+	}
+
+	.footer {
+		.toolbar {
+			text-align: center;
+			
+			button {
+				background-color: $extia-orange;
+			}
+		}
+	}
+}

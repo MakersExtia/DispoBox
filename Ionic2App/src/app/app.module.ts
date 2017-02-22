@@ -1,17 +1,23 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HTTPService } from '../services/http.service';
-import { DevHTTPService } from '../services/dev-http.service';
-import { DataService } from '../services/data.service';
+import {
+  HTTPService,
+  DevHTTPService,
+  DataService,
+  GoogleService,
+  CalendarService
+} from '../services/index';
 import { HomePage } from '../pages/home/home.component';
 import { FloorPage } from '../pages/floor/floor.component';
+import { CalendarPage } from '../pages/calendar/calendar.component';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    FloorPage
+    FloorPage,
+    CalendarPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,13 +26,16 @@ import { FloorPage } from '../pages/floor/floor.component';
   entryComponents: [
     MyApp,
     HomePage,
-    FloorPage
+    FloorPage,
+    CalendarPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DevHTTPService,
     HTTPService,
-    DataService
+    DataService,
+    GoogleService,
+    CalendarService
   ]
 })
 export class AppModule {}

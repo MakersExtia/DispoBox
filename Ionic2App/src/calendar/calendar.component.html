@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+  	<button ion-button menuToggle>
+      <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+      </svg>
+    </button>
+    <ion-title>
+      <strong>A</strong>genda des salles
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="getting-started">
+  <div *ngIf="loading === true" class="loader">
+    <img src="assets/img/loader.gif" />
+  </div>
+  <ion-card *ngFor="let room of rooms">
+    <ion-card-header>
+      {{ room.name }}
+    </ion-card-header>
+    <ion-card-content>
+      <h2>Réservations</h2>
+      <ul *ngIf="room.events.length > 0">
+        <li *ngFor="let event of room.events">
+          <span class="event-summary">{{ event.summary }}</span><br>
+          <span class="event-time">De {{ event.startTime }} jusqu'à {{ event.endTime }}</span>
+        </li>
+      </ul>
+      <p class="no-reservation" *ngIf="room.events.length == 0">
+        Aucune réservation
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar>
+    <button ion-button (click)="disconnect()">Me déconnecter</button>
+  </ion-toolbar>
+</ion-footer>

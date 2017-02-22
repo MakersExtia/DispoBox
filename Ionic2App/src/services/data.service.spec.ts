@@ -182,34 +182,34 @@ describe('Service: DataService', () => {
     });
   });
 
-  describe('countAvailableAndTotalBoxesForFloors', () => {
-    let floors = [];
+  // describe('countAvailableAndTotalBoxesForFloors', () => {
+  //   let floors = [];
 
-    beforeEach(() => {
-      service.boxes = [];
-      mockData.data.forEach(jsonBox => {
-        let box = new Box();
-        box.buildFromJSON(jsonBox);
-        service.boxes.push(box);
-      });
-      mockData.data.forEach(box => {
-        let doesFloorExist = floors.filter(floor => floor.floorNumber === Math.floor(box.name/10));
-        if (doesFloorExist.length === 0) {
-          let newFloor = new Floor();
-          newFloor.floorNumber = Math.floor(box.name/10);
-          floors.push(newFloor);
-        }
-      });
-    });
+  //   beforeEach(() => {
+  //     service.boxes = [];
+  //     mockData.data.forEach(jsonBox => {
+  //       let box = new Box();
+  //       box.buildFromJSON(jsonBox);
+  //       service.boxes.push(box);
+  //     });
+  //     mockData.data.forEach(box => {
+  //       let doesFloorExist = floors.filter(floor => floor.floorNumber === Math.floor(box.name/10));
+  //       if (doesFloorExist.length === 0) {
+  //         let newFloor = new Floor();
+  //         newFloor.floorNumber = Math.floor(box.name/10);
+  //         floors.push(newFloor);
+  //       }
+  //     });
+  //   });
 
-    it('should count available and total boxes by floor', () => {
-      let floorsWithBoxes = service.countAvailableAndTotalBoxesForFloors(floors);
-      expect(floorsWithBoxes[1].numberAvailableBoxes).toEqual(6);
-      expect(floorsWithBoxes[1].numberTotalBoxes).toEqual(7);
-      expect(floorsWithBoxes[2].numberAvailableBoxes).toEqual(6);
-      expect(floorsWithBoxes[2].numberTotalBoxes).toEqual(8);
-    });
-  });
+  //   it('should count available and total boxes by floor', () => {
+  //     let floorsWithBoxes = service.countAvailableAndTotalBoxesForFloors(floors);
+  //     expect(floorsWithBoxes[1].numberAvailableBoxes).toEqual(6);
+  //     expect(floorsWithBoxes[1].numberTotalBoxes).toEqual(7);
+  //     expect(floorsWithBoxes[2].numberAvailableBoxes).toEqual(6);
+  //     expect(floorsWithBoxes[2].numberTotalBoxes).toEqual(8);
+  //   });
+  // });
 
   describe('notifyObservers', () => {
     beforeEach(() => {

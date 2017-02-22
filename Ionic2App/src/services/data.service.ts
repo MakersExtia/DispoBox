@@ -7,7 +7,8 @@ import { Floor } from '../models/floor.model';
 import {
   CURRENT_ENVIRONMENT,
   ENVIRONMENT_DEVELOPMENT,
-  ENVIRONMENT_PRODUCTION
+  ENVIRONMENT_PRODUCTION,
+  STATUS_AVAILABLE_BOX
 } from '../config/app.config';
 import { REQUEST_TYPES } from '../config/api.config';
 import { RESPONSE_CODES } from '../config/return-codes.config';
@@ -27,16 +28,23 @@ export class DataService {
     private devHttpService: DevHTTPService
   ) {
     this.boxes = [];
-    if (CURRENT_ENVIRONMENT === ENVIRONMENT_PRODUCTION) {
-      this.dataService = this.httpService;
-    } else {
-      this.dataService = this.devHttpService;
-    }
+    this.setService();
     this.subscribeHTTPService();
   }
 
   getDataService() {
     return this.dataService;
+  }
+
+  setService() {
+    switch (CURRENT_ENVIRONMENT) {
+      case ENVIRONMENT_DEVELOPMENT:
+        this.dataService = this.devHttpService;
+        break;
+      case ENVIRONMENT_PRODUCTION:
+        this.dataService = this.httpService;
+        break;
+    }
   }
 
   subscribeHTTPService() {
@@ -52,6 +60,7 @@ export class DataService {
   }
 
   mapData(data: any) {
+    this.boxes = [];
     data.forEach(jsonBox => {
       if (parseInt(jsonBox.id, 10) !== 0) {
         let box = new Box();
@@ -115,7 +124,7 @@ export class DataService {
   countAvailableAndTotalBoxesForFloors(floors) {
     this.boxes.forEach(box => {
       let floor = floors.filter(floor => floor.floorNumber === Math.floor(box.name/10));
-      if (box.state === -1)
+      if (box.state === STATUS_AVAILABLE_BOX)
         ++floor[0].numberAvailableBoxes;
       ++floor[0].numberTotalBoxes;
     });
